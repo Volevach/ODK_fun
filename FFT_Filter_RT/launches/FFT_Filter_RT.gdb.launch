@@ -5,7 +5,7 @@
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.doReset" value="false"/>
 <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageFileName" value=""/>
 <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.imageOffset" value=""/>
-<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value="set architecture i386:x64-32&#13;&#10;target remote | java -jar &quot;C:/Program Files (x86)/Siemens/Automation/ODK1500S/V1.1/eclipse/build_tools/PMSExplorer.jar&quot; -s -a X86_64&#13;&#10;cd release (so)&#13;&#10;source FFT_Filter_RT.er"/>
+<stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.initCommands" value="set architecture i386:x64-32&#13;&#10;target remote | java -jar &quot;C:/Program Files (x86)/Siemens/Automation/ODK1500S/V2.0/eclipse/build_tools/PMSExplorer.jar&quot; -s -a X86_64&#13;&#10;cd release_so&#13;&#10;source FFT_Filter_RT.er"/>
 <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.ipAddress" value="localhost"/>
 <stringAttribute key="org.eclipse.cdt.debug.gdbjtag.core.jtagDevice" value="Generic TCP/IP"/>
 <booleanAttribute key="org.eclipse.cdt.debug.gdbjtag.core.loadImage" value="false"/>
@@ -32,7 +32,7 @@
 <booleanAttribute key="org.eclipse.cdt.dsf.gdb.UPDATE_THREADLIST_ON_SUSPEND" value="false"/>
 <intAttribute key="org.eclipse.cdt.launch.ATTR_BUILD_BEFORE_LAUNCH_ATTR" value="0"/>
 <stringAttribute key="org.eclipse.cdt.launch.COREFILE_PATH" value=""/>
-<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="release (so)\FFT_Filter_RT.so"/>
+<stringAttribute key="org.eclipse.cdt.launch.PROGRAM_NAME" value="release_so\FFT_Filter_RT.so"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_ATTR" value="FFT_Filter_RT"/>
 <booleanAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_AUTO_ATTR" value="true"/>
 <stringAttribute key="org.eclipse.cdt.launch.PROJECT_BUILD_CONFIG_ID_ATTR" value="cdt.managedbuild.config.gnu.cross.exe.debug.1624347434"/>

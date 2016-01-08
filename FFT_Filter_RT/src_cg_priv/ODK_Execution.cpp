@@ -2,8 +2,8 @@
  * This file is ALWAYS GENERATED - DO NOT MODIFY this file.
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 101.0.902.1
- * at Wed January 6 00:08:23 2016
+ * File created by ODK_CodeGenerator version 0.0.116.12
+ * at Di April 21 09:52:49 2015
 */
 
 #include "ODK_Functions.h"
@@ -39,29 +39,29 @@ ODK_UINT64 g_tickTimeBase = 0;
 struct tm  g_TimeInfoBase = {0};
 
 #ifndef _DEBUG
-  const int g_DsoHeapSize  = (4 * 1024);
-  const int g_DsoAdditionalHeapSize = (20 + 16);
-  char      g_DsoHeapMemory [g_DsoHeapSize + g_DsoAdditionalHeapSize];
-  const int g_DsoHeapMaxBlockSize   = 1024;
-  const int g_DsoHeapFreeStackSize  = (((g_DsoHeapMaxBlockSize-1)>>3)+1) * 24;
-  char      g_DsoHeapFreeStack [g_DsoHeapFreeStackSize];
+	const int g_DsoHeapSize  = (4 * 1024);
+	const int g_DsoAdditionalHeapSize = (20 + 16);
+	char      g_DsoHeapMemory [g_DsoHeapSize + g_DsoAdditionalHeapSize];
+	const int g_DsoHeapMaxBlockSize   = 1024;
+	const int g_DsoHeapFreeStackSize  = (((g_DsoHeapMaxBlockSize-1)>>3)+1) * 24;
+	char      g_DsoHeapFreeStack [g_DsoHeapFreeStackSize];
 
-  const int ODK_GetHeapSize()
-  {
-	return g_DsoHeapSize;
-  }
-  const int ODK_GetAdditionalHeapSize()
-  {
-	return g_DsoAdditionalHeapSize;
-  }
-  const int ODK_GetHeapMaxBlockSize()
-  {
-	return g_DsoHeapMaxBlockSize;
-  }
-  const int ODK_GetHeapFreeStackSize()
-  {
-	return g_DsoHeapFreeStackSize;
-  }
+	const int ODK_GetHeapSize()
+	{
+		return g_DsoHeapSize;
+	}
+	const int ODK_GetAdditionalHeapSize()
+	{
+		return g_DsoAdditionalHeapSize;
+	}
+	const int ODK_GetHeapMaxBlockSize()
+	{
+		return g_DsoHeapMaxBlockSize;
+	}
+	const int ODK_GetHeapFreeStackSize()
+	{
+		return g_DsoHeapFreeStackSize;
+	}
 #endif
 
 
@@ -72,11 +72,11 @@ typedef enum CommandHash_e
   FCT_HASH_GetTrace = 0x2260950B
 }CommandHash_t;
 
-//Execute()
-ODK_RESULT Execute (ODK_UINT32        cmd
+// Execute()
+ODK_RESULT Execute (ODK_UINT32  cmd
                    ,const char* const in
-                   ,const char*       inout
-                   ,const char*       out)
+                   ,const char* inout
+                   ,const char* out)
 {
   switch (cmd)
   {
@@ -226,7 +226,7 @@ ODK_RESULT GetTrace (const ODK_INT16& TraceCount, ODK_S7STRING TraceBuffer[256][
   ODK_INT16  myTraceCount = TraceCount;
   int filled = 0;
 
-  if (myTraceCount > MAX_NUMBER_OF_LOG_ENTRIES ||  myTraceCount <= 0)
+  if (myTraceCount > MAX_NUMBER_OF_LOG_ENTRIES || myTraceCount > 256 ||  myTraceCount <= 0)
   {
 	myTraceCount = MAX_NUMBER_OF_LOG_ENTRIES;
   }

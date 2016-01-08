@@ -1,7 +1,8 @@
-(* this ALWAYS GENERATED file contains the FFT_Filter_RTLoad ,     *)
-(* FFT_Filter_RTUnload and defined functions.                      *)
-(* File created by ODK_CodeGenerator version 101.0.902.1 *)
-(* at Wed January 6 00:08:23 2016                          *)
+(* this ALWAYS GENERATED file contains the Test0421Load , *)
+(* Test0421Unload and defined functions.                  *)
+
+(* File created by ODK_CodeGenerator version 0.0.116.12   *)
+(* at Di April 21 10:02:24 2015                           *)
 
 FUNCTION_BLOCK "FFT_Filter_RT_Load"
 { S7_Optimized_Access := 'TRUE' }
@@ -21,7 +22,7 @@ VERSION : 0.1
     LIBRARY_NAME : String := '<rt>FFT_Filter_RT.so';
   END_VAR
   VAR CONSTANT 
-    INSTANCE_ID : UDInt := 3526028621;
+    INSTANCE_ID : UDInt := 2109394993;
   END_VAR
 BEGIN
   #ODK_Load_Instance (REQ:=#REQ,
@@ -30,7 +31,7 @@ BEGIN
                       DONE=>#DONE,
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
-                      STATUS=>#STATUS);
+                      STATUS=>#STATUS);         
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RT_Unload"
@@ -50,7 +51,7 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    INSTANCE_ID : UDInt := 3526028621;
+    INSTANCE_ID : UDInt := 2109394993;
   END_VAR
 BEGIN
   #ODK_Unld_Instance (REQ:=#REQ,
@@ -87,10 +88,10 @@ VERSION : 0.1
     i : Int;
   END_VAR
   VAR CONSTANT 
-    INSTANCE_ID : UDINT := 3526028621;
+    INSTANCE_ID : UDINT := 2109394993;
     COMMAND : UDINT := 3928910264;
   END_VAR
-BEGIN
+ BEGIN
   #pos := 0;
   #err := WRITE_LITTLE ( src_variable := #myInt, dest_array := #IN_BUFFER,  pos := #pos);
   #pos := 0;
@@ -136,7 +137,7 @@ VERSION : 0.1
     tmp_string : String;
   END_VAR
   VAR CONSTANT 
-    INSTANCE_ID : UDINT := 3526028621;
+    INSTANCE_ID : UDINT := 2109394993;
     COMMAND : UDINT := 576754955;
   END_VAR
 BEGIN
@@ -150,18 +151,18 @@ BEGIN
                     );
   IF STATUS < 16#7000 THEN
     #pos := 0;
-    FOR #j := 0 to 255 DO
+    for #j := 0 to 255 DO
       #tmp_string := '';
       #tmpStringLen := #OUT_BUFFER[#pos];
       #pos := #pos + 1;
       #tmpStringLen := #OUT_BUFFER[#pos];
       #pos := #pos + 1;
-      FOR #i := 1 to BYTE_TO_INT(#tmpStringLen) DO
+      for #i := 1 to BYTE_TO_INT(#tmpStringLen) DO
         tmp_string[#i] := BYTE_TO_CHAR(#OUT_BUFFER[#pos]);
         pos := #pos + 1;
-      END_FOR;
+      end_for;
       #pos := #pos + 125 - LEN (#tmp_string) ;
       #TraceBuffer[#j] := #tmp_string;
-    END_FOR;
+    end_for;
   END_IF;
 END_FUNCTION_BLOCK
