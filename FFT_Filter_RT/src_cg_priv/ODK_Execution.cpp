@@ -2,8 +2,8 @@
  * This file is ALWAYS GENERATED - DO NOT MODIFY this file.
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 0.0.116.12
- * at Di April 21 09:52:49 2015
+ * File created by ODK_CodeGenerator version 200.0.1202.1
+ * at Sat January 9 00:28:23 2016
 */
 
 #include "ODK_Functions.h"
@@ -21,7 +21,7 @@
 typedef struct TraceEntry_s
 {
 	ODK_UINT64  TickCounter;
-	ODK_UINT16  OB_Number;
+	ODK_UINT16  OB_Number; 
 	char        Text[MAX_USER_TRACE_LEN];
 } TraceEntry_t;
 #define ODK_TRACE_GET_TICK(x)  __asm__ __volatile__ (".byte 0x0f, 0x31" : "=a" (((int*)(x))[0]), "=d"(((int*)(x))[1]))
@@ -37,46 +37,48 @@ volatile unsigned short g_currentOBnumber = 0;
 ODK_UINT64 g_tickResolutionPerSec = (ODK_UINT64) 1u;
 ODK_UINT64 g_tickTimeBase = 0;
 struct tm  g_TimeInfoBase = {0};
+ODK_UINT8  g_SyncCallParallelCount = 3;
+ODK_UINT32 g_SyncCallStackSize = (32 * 1024);
+ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
 
 #ifndef _DEBUG
-	const int g_DsoHeapSize  = (4 * 1024);
-	const int g_DsoAdditionalHeapSize = (20 + 16);
-	char      g_DsoHeapMemory [g_DsoHeapSize + g_DsoAdditionalHeapSize];
-	const int g_DsoHeapMaxBlockSize   = 1024;
-	const int g_DsoHeapFreeStackSize  = (((g_DsoHeapMaxBlockSize-1)>>3)+1) * 24;
-	char      g_DsoHeapFreeStack [g_DsoHeapFreeStackSize];
-
-	const int ODK_GetHeapSize()
-	{
-		return g_DsoHeapSize;
-	}
-	const int ODK_GetAdditionalHeapSize()
-	{
-		return g_DsoAdditionalHeapSize;
-	}
-	const int ODK_GetHeapMaxBlockSize()
-	{
-		return g_DsoHeapMaxBlockSize;
-	}
-	const int ODK_GetHeapFreeStackSize()
-	{
-		return g_DsoHeapFreeStackSize;
-	}
+  const int g_DsoHeapSize  = (4 * 1024);
+  const int g_DsoAdditionalHeapSize = (20 + 16);
+  char      g_DsoHeapMemory [g_DsoHeapSize + g_DsoAdditionalHeapSize];
+  const int g_DsoHeapMaxBlockSize   = 1024;
+  const int g_DsoHeapFreeStackSize  = (((g_DsoHeapMaxBlockSize-1)>>3)+1) * 24;
+  char      g_DsoHeapFreeStack [g_DsoHeapFreeStackSize];
+  const int ODK_GetHeapSize()
+  {
+	return g_DsoHeapSize;
+  }
+  const int ODK_GetAdditionalHeapSize()
+  {
+	return g_DsoAdditionalHeapSize;
+  }
+  const int ODK_GetHeapMaxBlockSize()
+  {
+	return g_DsoHeapMaxBlockSize;
+  }
+  const int ODK_GetHeapFreeStackSize()
+  {
+	return g_DsoHeapFreeStackSize;
+  }
 #endif
-
 
 //command enums
 typedef enum CommandHash_e
 {
-  FCT_HASH_SampleFunction = 0xEA2E69B8,
-  FCT_HASH_GetTrace = 0x2260950B
+  FCT_HASH_SampleFunction = 0xB93B0B58,
+  FCT_HASH_FFT1024p = 0x8CF1A551,
+  FCT_HASH_GetTrace = 0xC4B4F52B
 }CommandHash_t;
 
-// Execute()
-ODK_RESULT Execute (ODK_UINT32  cmd
+//Execute()
+ODK_RESULT Execute (ODK_UINT32        cmd
                    ,const char* const in
-                   ,const char* inout
-                   ,const char* out)
+                   ,const char*       inout
+                   ,const char*       out)
 {
   switch (cmd)
   {
@@ -84,11 +86,15 @@ ODK_RESULT Execute (ODK_UINT32  cmd
     {
       return SampleFunction (*((ODK_INT32*) &(in[0])), *((ODK_BOOL*) &(out[0])), *((ODK_DOUBLE*) &(inout[0])));
     }
+    case FCT_HASH_FFT1024p:
+    {
+      return FFT1024p (*((ODK_UINT8*) &(in[0])), *((ODK_FLOAT*) &(out[0])), *((ODK_FLOAT*) &(out[4])));
+    }
     case FCT_HASH_GetTrace:
     {
-      for (int i=0;i<256; i++)
+      for (int i_1=0; i_1<256; i_1++)
       {
-        *((ODK_S7STRING*) &(out[0 + (i*127)] )) = 125;
+        *((ODK_S7STRING*) &(out[0 + (i_1*127)] )) = 125;
       }
       return GetTrace (*((ODK_INT16*) &(in[0])), (ODK_S7STRING(*)[127]) &(out[0]));
     }
@@ -226,13 +232,13 @@ ODK_RESULT GetTrace (const ODK_INT16& TraceCount, ODK_S7STRING TraceBuffer[256][
   ODK_INT16  myTraceCount = TraceCount;
   int filled = 0;
 
-  if (myTraceCount > MAX_NUMBER_OF_LOG_ENTRIES || myTraceCount > 256 ||  myTraceCount <= 0)
+  if (myTraceCount > MAX_NUMBER_OF_LOG_ENTRIES ||  myTraceCount <= 0)
   {
 	myTraceCount = MAX_NUMBER_OF_LOG_ENTRIES;
   }
-  int i = 0;
+  int _odk_internal_i = 0;
   // copy TraceCount trace entries
-  for (; i < myTraceCount; i++)
+  for (; _odk_internal_i < myTraceCount; _odk_internal_i++)
   {
     char str[MAX_LOG_ENTRY_LEN] = "";
     int index = myIdx & (MAX_NUMBER_OF_LOG_ENTRIES - 1);
@@ -249,14 +255,14 @@ ODK_RESULT GetTrace (const ODK_INT16& TraceCount, ODK_S7STRING TraceBuffer[256][
     #endif
     snprintf(&(str[filled]), MAX_LOG_ENTRY_LEN - filled, " OB%d %s", g_TraceBuffer[index].OB_Number, g_TraceBuffer[index].Text);
     str[MAX_LOG_ENTRY_LEN - 1] = 0;
-    Convert_SZSTR_to_S7STRING (str, TraceBuffer[i]);
+    Convert_SZSTR_to_S7STRING (str, TraceBuffer[_odk_internal_i]);
     myIdx--;
     filled = 0;
   }
   // fill empty strings for not wished trace entries
-  for (; i < 256; i++)
+  for (; _odk_internal_i < 256; _odk_internal_i++)
   {
-    Convert_SZSTR_to_S7STRING ("", TraceBuffer[i]);
+    Convert_SZSTR_to_S7STRING ("", TraceBuffer[_odk_internal_i]);
     myIdx--;
   }
 

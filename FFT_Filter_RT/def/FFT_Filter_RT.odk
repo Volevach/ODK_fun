@@ -45,3 +45,8 @@ STEP7Prefix=FFT_Filter_RT
 ODK_RESULT SampleFunction([IN]    ODK_INT32    myInt		// integer value as input
                         , [OUT]   ODK_BOOL     myBool		// bool value as output
                         , [INOUT] ODK_DOUBLE   myReal);		// double value as input and output
+                        
+ODK_RESULT FFT1024p([IN]    ODK_INT8[1024]     timeCoef     // time domain coefficients
+                  , [OUT]   ODK_FLOAT[1024]    freqCoefRe	  // real frequency domain coefs
+                  , [OUT]   ODK_FLOAT[1024]    freqCoefIm); // imaginary frequency domain coefs
+                        

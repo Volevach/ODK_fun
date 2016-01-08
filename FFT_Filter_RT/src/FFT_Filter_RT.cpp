@@ -1,5 +1,11 @@
 #include "ODK_Functions.h"
 #include <stdlib.h>
+#include "complex.h"
+#include "FFT_1024.h"
+#include "BP_Filter.h"
+
+BP_Filter MyFiler;
+FFT_1024 MyFFT;
 
 /*
  * OnLoad() is invoked after the application binary was loaded.
@@ -11,6 +17,8 @@
  */
 EXPORT_API ODK_RESULT OnLoad (void)
 {
+	MyFiler = BP_Filter();
+	MyFFT = FFT_1024();
     // place your code here
 	return ODK_SUCCESS;
 }
