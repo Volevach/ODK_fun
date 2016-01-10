@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{a96d3e4a-2665-46f3-a6e5-0f47ce264892}</UniqueIdentifier>
+      <Extensions>.cpp;.cxx;.c</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{e4e464d9-71b2-4ea4-a21f-3dae4c7ebf1a}</UniqueIdentifier>
+      <Extensions>.h;.hpp</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{ffee6da5-afa0-4a01-a382-6df943786793}</UniqueIdentifier>
+      <Extensions>.rc;.rc2;.ico;.gif;.bmp;.xml</Extensions>
+    </Filter>
+    <Filter Include="Definition File">
+      <UniqueIdentifier>{fbd38317-2277-40b6-bf11-21bd9cd19dbb}</UniqueIdentifier>
+      <Extensions>.odk</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{f3b2d0f6-eca2-46a8-8067-0ae8b0ab3aae}</UniqueIdentifier>
+      <Extensions>.cpp;.c;.h</Extensions>
+    </Filter>
+    <Filter Include="STEP7">
+      <UniqueIdentifier>{51ba58d3-d806-4986-9ab0-046942fa5b5d}</UniqueIdentifier>
+      <Extensions>.scl</Extensions>
+    </Filter>
+    <Filter Include="ODK Helpers">
+      <UniqueIdentifier>{05da08e7-27d3-408a-9618-f63201c94997}</UniqueIdentifier>
+      <Extensions>.cpp;.c;.h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hello_World.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src_cg_priv\ODK_Execution.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_CpuReadData.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_CpuReadWriteData.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_StringHelper.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_cg_priv\ODK_Types.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_cg_priv\ODK_Functions.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_CpuReadData.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_CpuReadWriteData.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_StringHelper.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Hello_World.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="STEP7\Hello_World.scl">
+      <Filter>STEP7</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="def\Hello_World.odk">
+      <Filter>Definition File</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="ODK_1500S.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
