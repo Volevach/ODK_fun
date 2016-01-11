@@ -85,14 +85,18 @@ int main (int argc, char* argv[])
 #endif // _DEBUG
 
 
-/*
- * SampleFunction() is defined in ODK_Functions.h.
- * ODK_Functions.h is automatically generated from Interface.odk.
- */
-ODK_RESULT SampleFunction (const ODK_INT32& myInt, ODK_BOOL& myBool, ODK_DOUBLE& myReal)
-{
-    ODK_TRACE("SampleFunction(myInt=%d, myBool=%d, myReal=%lf)", myInt, myBool, myReal);
 
-    // place your code here
-    return ODK_SUCCESS;
+ODK_RESULT FFT1024p (const ODK_UINT16 timeCoef[BLOCK_LEN], ODK_FLOAT freqCoefRe[BLOCK_LEN], ODK_FLOAT freqCoefIm[1024])
+{
+	Complex freqCoef[BLOCK_LEN];
+	MyFFT.FFT_1024_mono(timeCoef, freqCoef);
+	// place your code here
+	for(int i = 0; i < BLOCK_LEN; i++)
+	{
+		freqCoefRe[i] = freqCoef[i].GetReal();
+		freqCoefIm[i] = freqCoef[i].GetImag();
+	}
+
+	return ODK_SUCCESS;
 }
+

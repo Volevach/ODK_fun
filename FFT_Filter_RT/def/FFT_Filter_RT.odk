@@ -41,12 +41,8 @@ STEP7Prefix=FFT_Filter_RT
  */
 
 // Basic function in order to show 
-// how to create a function in ODK 1500S.
-ODK_RESULT SampleFunction([IN]    ODK_INT32    myInt		// integer value as input
-                        , [OUT]   ODK_BOOL     myBool		// bool value as output
-                        , [INOUT] ODK_DOUBLE   myReal);		// double value as input and output
                         
-ODK_RESULT FFT1024p([IN]    ODK_INT8[1024]     timeCoef     // time domain coefficients
-                  , [OUT]   ODK_FLOAT[1024]    freqCoefRe	  // real frequency domain coefs
-                  , [OUT]   ODK_FLOAT[1024]    freqCoefIm); // imaginary frequency domain coefs
+ODK_RESULT FFT1024p([IN]    ODK_UINT16  timeCoef[1024]     // time domain coefficients
+                  , [OUT]   ODK_FLOAT   freqCoefRe[1024]	  // real frequency domain coefs
+                  , [OUT]   ODK_FLOAT   freqCoefIm[1024]); // imaginary frequency domain coefs
                         
