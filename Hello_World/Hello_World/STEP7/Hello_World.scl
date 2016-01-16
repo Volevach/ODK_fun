@@ -2,8 +2,8 @@ FUNCTION_BLOCK "Hello_World_Load"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 200.0.1202.1
-//at Di September 22 13:29:14 2015
+//Created by ODK_CodeGenerator version 2.0.0.0
+//at Sat January 16 23:20:21 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -26,7 +26,7 @@ BEGIN
 //
 // DO NOT CHANGE BELOW OF THIS LINE !!
 // This is an automatic generated block by the
-// ODK_CodeGenerator version 200.0.1202.1
+// ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE !!
 //
   #ODK_Load_Instance (REQ:=#REQ,
@@ -39,7 +39,7 @@ BEGIN
 //
 // DO NOT CHANGE !!
 // This is an automatic generated block by the
-// ODK_CodeGenerator version 200.0.1202.1
+// ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE ABOVE OF THIS LINE !!
 //
 END_FUNCTION_BLOCK
@@ -48,8 +48,8 @@ FUNCTION_BLOCK "Hello_World_Unload"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 200.0.1202.1
-//at Di September 22 13:29:14 2015
+//Created by ODK_CodeGenerator version 2.0.0.0
+//at Sat January 16 23:20:21 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -71,7 +71,7 @@ BEGIN
  //
  // DO NOT CHANGE BELOW OF THIS LINE !!
  // This is an automatic generated block by the
- // ODK_CodeGenerator version 200.0.1202.1
+ // ODK_CodeGenerator version 2.0.0.0
  // DO NOT CHANGE !!
  //
   #ODK_Unld_Instance (REQ:=#REQ,
@@ -83,7 +83,7 @@ BEGIN
 //
 // DO NOT CHANGE !!
 // This is an automatic generated block by the
-// ODK_CodeGenerator version 200.0.1202.1
+// ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE ABOVE OF THIS LINE !!
 //
 END_FUNCTION_BLOCK
@@ -93,8 +93,8 @@ FUNCTION_BLOCK "Hello_WorldHelloWorld_Win32"
 { S7_Optimized_Access := 'TRUE'} 
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 200.0.1202.1
-//at Di September 22 13:29:14 2015
+//Created by ODK_CodeGenerator version 2.0.0.0
+//at Sat January 16 23:20:21 2016
 //********************************************************
 // Basic function in order to show 
 // how to create a function in ODK 1500S.
@@ -135,7 +135,7 @@ BEGIN
 //
 // DO NOT CHANGE BELOW OF THIS LINE !!
 // This is an automatic generated block by the
-// ODK_CodeGenerator version 200.0.1202.1
+// ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE !!
 //
 // Basic function in order to show 
@@ -201,7 +201,7 @@ BEGIN
 //
 // DO NOT CHANGE !!
 // This is an automatic generated block by the
-// ODK_CodeGenerator version 200.0.1202.1
+// ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE ABOVE OF THIS LINE !!
 //
 END_FUNCTION_BLOCK

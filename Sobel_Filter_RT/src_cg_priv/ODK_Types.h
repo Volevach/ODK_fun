@@ -3,12 +3,20 @@
  * This file contains the elementary data types of ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0 
- * at Sat January 16 23:20:21 2016 
+ * at Sat January 16 23:56:22 2016 
  */
 
 #if !defined ODK_Types_H
 #define ODK_Types_H
 
+#define ODK_TRACE_ON 
+#ifdef ODK_TRACE_ON
+  #define ODK_TRACE(msg, ...) ODK_Trace(__FILE__, __LINE__, msg, ##__VA_ARGS__)
+#else
+  #define ODK_TRACE(msg, ...)
+#endif
+
+void ODK_Trace(const char* p_szFileName, const int p_nLine, const char* p_szMsg, ...);
 
 #define  ODK_SUCCESS         0x0000
 #define  ODK_TRUE            1
@@ -35,8 +43,6 @@ typedef  unsigned long long  ODK_LDT;
 typedef  unsigned long long  ODK_LTOD;
 typedef  unsigned long       ODK_TOD;
 typedef  unsigned char       ODK_S7STRING;
-typedef  unsigned short      ODK_S7WSTRING;
-typedef  wchar_t             ODK_WCHAR;
 typedef  char                ODK_CHAR;
 typedef  unsigned short      ODK_RESULT;
 
