@@ -1,9 +1,4 @@
-
-typedef struct complex
-{
-    float re;
-    float im;
-} complex;
+#include "ODK_Types.h"
 
 complex ConjCompl(complex a);
 complex compAdd(complex a, complex b);

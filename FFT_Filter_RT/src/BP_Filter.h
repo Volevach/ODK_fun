@@ -1,4 +1,5 @@
 #pragma once
+#include "ODK_Types.h"
 #include "complex.h"
 #include "FFT_1024.h"
 
@@ -10,6 +11,7 @@ public:
     BP_Filter(void);
     ~BP_Filter(void);
     void low_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
+    void low_pass_mono(const complex src_sig[BLOCK_LEN], complex sink_sig[BLOCK_LEN]);
     void high_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
     void band_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
     void sig_filter(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2], complex filter_par[BLOCK_LEN]);

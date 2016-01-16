@@ -3,7 +3,7 @@
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sat January 16 21:14:08 2016
+ * at Sat January 16 22:28:41 2016
 */
 
 #include "ODK_Functions.h"
@@ -13,6 +13,8 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>
+#include "ODK_CpuReadData.h"
+#include "ODK_CpuReadWriteData.h"
 
 #define ODK_COMMAND_NOT_IMPLEMENTED    0x8098 
 #define MAX_LOG_ENTRY_LEN 				126
@@ -69,9 +71,9 @@ ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
 //command enums
 typedef enum CommandHash_e
 {
-  FCT_HASH_FFT1024p = 0x7FB2D675,
-  FCT_HASH_LP_Filter = 0xF6946EE5,
-  FCT_HASH_IFFT1024p = 0x9F759A19,
+  FCT_HASH_FFT1024p = 0x449D3B68,
+  FCT_HASH_LP_Filter = 0x2280AFFD,
+  FCT_HASH_IFFT1024p = 0xA47BC722,
   FCT_HASH_GetTrace = 0xC4B4F52B
 }CommandHash_t;
 
@@ -85,15 +87,15 @@ ODK_RESULT Execute (ODK_UINT32        cmd
   {
     case FCT_HASH_FFT1024p:
     {
-      return FFT1024p ((ODK_INT16*) &(in[0]), (ODK_FLOAT*) &(out[0]), (ODK_FLOAT*) &(out[4096]));
+      return FFT1024p ((ODK_INT16*) &(in[0]), (complex*) &(out[0]));
     }
     case FCT_HASH_LP_Filter:
     {
-      return LP_Filter ((ODK_FLOAT*) &(in[0]), (ODK_FLOAT*) &(in[4096]), (ODK_FLOAT*) &(out[0]), (ODK_FLOAT*) &(out[4096]));
+      return LP_Filter ((complex*) &(in[0]), (complex*) &(out[0]));
     }
     case FCT_HASH_IFFT1024p:
     {
-      return IFFT1024p ((ODK_FLOAT*) &(in[0]), (ODK_FLOAT*) &(in[4096]), (ODK_INT16*) &(out[0]));
+      return IFFT1024p ((complex*) &(in[0]), (ODK_INT16*) &(out[0]));
     }
     case FCT_HASH_GetTrace:
     {

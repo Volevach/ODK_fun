@@ -17,11 +17,13 @@ FFT_1024::FFT_1024(void)
     for(i = 0; i < STAGES; i++)
     {
         d_fac[i] = d;
-        twiddle_fac[i] = complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        twiddle_fac[i].re = (float)cos(-2.0 * PI / d);
+        twiddle_fac[i].im = (float)sin(-2.0 * PI / d);
         d <<= 1;
     }
 
-    w_0 = complex(1.0, 0.0);
+    w_0.re = 1.0;
+    w_0.im = 0.0;
 }
 
 
@@ -44,10 +46,12 @@ void FFT_1024::FFT_1024_mono(const short time_coef[BLOCK_LEN], complex freq_coef
     for(n = 1; n <= 10; n++)
     {
         d = (int)(pow(2.0,n));
-        wd = complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        wd.re = (float)cos(-2.0 * PI / d);
+        wd.im = (float)sin(-2.0 * PI / d);
         for(k = 0; k < BLOCK_LEN; k+=d)
         {
-            w = complex(1.0, 0.0);
+            w.re = 1.0;
+            w.im = 0.0;
             for(m = 0; m < (d/2); m++)
             {
 
@@ -102,6 +106,44 @@ void FFT_1024::FFT_1024_stereo(const short time_coef[BLOCK_LEN][2], complex freq
     }
 }
 
+void FFT_1024::IFFT_1024_mono(const complex freq_coef[BLOCK_LEN], short time_coef[BLOCK_LEN])
+{
+    int n, d, k, m;
+
+    complex w;
+    complex wd;
+    complex t;
+    complex x;
+    complex freq_coef_rev[BLOCK_LEN];
+
+    bitReverse(freq_coef, freq_coef_rev);
+
+    for(n = 1; n <= 10; n++)
+    {
+        d = d_fac[n-1];
+        wd = ConjCompl(twiddle_fac[n-1]);
+        for(k = 0; k < BLOCK_LEN; k+=d)
+        {
+            w = w_0;
+            for(m = 0; m < (d/2); m++)
+            {
+                t = compMul(w, freq_coef_rev[m + k + (d/2)]);
+                x = freq_coef_rev[m + k];
+                freq_coef_rev[m + k] = compAdd(x, t);
+                freq_coef_rev[m + k + (d/2)] = compSub(x, t);
+
+                // twidde :)
+                w = compMul(w,wd);
+            }
+        }
+    }
+
+    for(n = 0; n < BLOCK_LEN; n++)
+    {
+        time_coef[n] = (short)( ((int)freq_coef_rev[n].re) >> 10);
+    }
+}
+
 void FFT_1024::IFFT_1024_stereo(const complex freq_coef[BLOCK_LEN][2], short time_coef[BLOCK_LEN][2])
 {
     int n, d, k, m;
@@ -112,7 +154,7 @@ void FFT_1024::IFFT_1024_stereo(const complex freq_coef[BLOCK_LEN][2], short tim
     complex x;
     complex freq_coef_rev[BLOCK_LEN][2];
 
-    bitReverse(freq_coef, freq_coef_rev);
+    bitReverse2(freq_coef, freq_coef_rev);
 
     for(n = 1; n <= 10; n++)
     {
@@ -143,13 +185,13 @@ void FFT_1024::IFFT_1024_stereo(const complex freq_coef[BLOCK_LEN][2], short tim
 
     for(n = 0; n < BLOCK_LEN; n++)
     {
-        time_coef[n][0] = (short)( ((int)freq_coef_rev[n][0].real) >> 10);
-        time_coef[n][1] = (short)( ((int)freq_coef_rev[n][1].real) >> 10);
+        time_coef[n][0] = (short)( ((int)freq_coef_rev[n][0].re) >> 10);
+        time_coef[n][1] = (short)( ((int)freq_coef_rev[n][1].re) >> 10);
     }
 }
 
 
-void FFT_1024::bitReverse(const complex a[BLOCK_LEN][2], complex b[BLOCK_LEN][2])
+void FFT_1024::bitReverse2(const complex a[BLOCK_LEN][2], complex b[BLOCK_LEN][2])
 {
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
@@ -159,13 +201,25 @@ void FFT_1024::bitReverse(const complex a[BLOCK_LEN][2], complex b[BLOCK_LEN][2]
     }
 }
 
+void FFT_1024::bitReverse(const complex a[BLOCK_LEN], complex b[BLOCK_LEN])
+{
+    int i = 0;
+    for(i = 0; i < BLOCK_LEN; i++)
+    {
+        b[i] = a[bitRevInd[i]];
+    }
+}
+
 void FFT_1024::bitReverse_to_complx2(const short a[BLOCK_LEN][2], complex b[BLOCK_LEN][2])
 {
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i][0] = complex((float)a[bitRevInd[i]][0], 0.0);
-        b[i][1] = complex((float)a[bitRevInd[i]][1], 0.0);
+        b[i][0].re = (float)a[bitRevInd[i]][0];
+        b[i][0].im = 0.0;
+
+        b[i][1].re = (float)a[bitRevInd[i]][1];
+        b[i][1].im = 0.0;
     }
 }
 
@@ -174,6 +228,7 @@ void FFT_1024::bitReverse_to_complx(const short a[BLOCK_LEN], complex b[BLOCK_LE
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i] = complex((float)a[bitRevInd[i]],0.0);
+        b[i].re = (float)a[bitRevInd[i]];
+        b[i].im = 0.0;
     }
 }
