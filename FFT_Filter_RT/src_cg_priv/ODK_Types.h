@@ -3,7 +3,7 @@
  * This file contains the elementary data types of ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0 
- * at Sat January 16 22:28:42 2016 
+ * at Sat January 16 22:46:11 2016 
  */
 
 #if !defined ODK_Types_H

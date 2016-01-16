@@ -3,7 +3,7 @@
  * This file contains the function prototypes the user defined.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sat January 16 22:28:42 2016 
+ * at Sat January 16 22:46:11 2016 
 */
 
 #if !defined    ODK_Functions_H 
@@ -19,21 +19,27 @@
 
 ODK_RESULT FFT1024p (
   /*IN*/ const ODK_INT16 timeCoef[1024],// time domain coefficients
-  /*OUT*/ complex freqCoef[1024]// frequency domain coefs
+  /*OUT*/ complex freqCoef[1024]// frequency domain coefficients
 );
 #define _ODK_FUNCTION_FFT1024P  ODK_RESULT FFT1024p (/*IN*/ const ODK_INT16 timeCoef[1024], /*OUT*/ complex freqCoef[1024])
 
 ODK_RESULT LP_Filter (
-  /*IN*/ const complex src[1024],// time domain coefficients
-  /*OUT*/ complex sink[1024]// imaginary frequency domain coefs
+  /*IN*/ const complex freqCoef[1024],// filter input
+  /*OUT*/ complex freqCoefFilt[1024]// filter output
 );
-#define _ODK_FUNCTION_LP_FILTER  ODK_RESULT LP_Filter (/*IN*/ const complex src[1024], /*OUT*/ complex sink[1024])
+#define _ODK_FUNCTION_LP_FILTER  ODK_RESULT LP_Filter (/*IN*/ const complex freqCoef[1024], /*OUT*/ complex freqCoefFilt[1024])
 
 ODK_RESULT IFFT1024p (
-  /*IN*/ const complex freqCoefRe[1024],// frequency domain coefs
-  /*OUT*/ ODK_INT16 timeCoef[1024]// time domain coefficients
+  /*IN*/ const complex freqCoef[1024],// frequency domain coefficients
+  /*OUT*/ ODK_INT16 timeCoefOut[1024]// time domain coefficients
 );
-#define _ODK_FUNCTION_IFFT1024P  ODK_RESULT IFFT1024p (/*IN*/ const complex freqCoefRe[1024], /*OUT*/ ODK_INT16 timeCoef[1024])
+#define _ODK_FUNCTION_IFFT1024P  ODK_RESULT IFFT1024p (/*IN*/ const complex freqCoef[1024], /*OUT*/ ODK_INT16 timeCoefOut[1024])
+
+ODK_RESULT FFT_Filt (
+  /*IN*/ const ODK_INT16 timeCoef[1024],// time domain input coefficients
+  /*OUT*/ ODK_INT16 timeCoefOut[1024]// time domain output coefficients
+);
+#define _ODK_FUNCTION_FFT_FILT  ODK_RESULT FFT_Filt (/*IN*/ const ODK_INT16 timeCoef[1024], /*OUT*/ ODK_INT16 timeCoefOut[1024])
 
 ODK_RESULT GetTrace (
   /*IN*/ const ODK_INT16& TraceCount,

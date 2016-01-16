@@ -3,7 +3,7 @@
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sat January 16 22:28:41 2016
+ * at Sat January 16 22:46:11 2016
 */
 
 #include "ODK_Functions.h"
@@ -72,8 +72,9 @@ ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
 typedef enum CommandHash_e
 {
   FCT_HASH_FFT1024p = 0x449D3B68,
-  FCT_HASH_LP_Filter = 0x2280AFFD,
-  FCT_HASH_IFFT1024p = 0xA47BC722,
+  FCT_HASH_LP_Filter = 0x826821A3,
+  FCT_HASH_IFFT1024p = 0xAAC18141,
+  FCT_HASH_FFT_Filt = 0xB4512AC1,
   FCT_HASH_GetTrace = 0xC4B4F52B
 }CommandHash_t;
 
@@ -96,6 +97,10 @@ ODK_RESULT Execute (ODK_UINT32        cmd
     case FCT_HASH_IFFT1024p:
     {
       return IFFT1024p ((complex*) &(in[0]), (ODK_INT16*) &(out[0]));
+    }
+    case FCT_HASH_FFT_Filt:
+    {
+      return FFT_Filt ((ODK_INT16*) &(in[0]), (ODK_INT16*) &(out[0]));
     }
     case FCT_HASH_GetTrace:
     {

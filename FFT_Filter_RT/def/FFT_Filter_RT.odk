@@ -50,13 +50,14 @@ ODK_STRUCT complex
 
                         
 ODK_RESULT FFT1024p([IN]    ODK_INT16   timeCoef[1024]     // time domain coefficients
-                  , [OUT]   complex     freqCoef[1024]);   // frequency domain coefs
+                  , [OUT]   complex     freqCoef[1024]);   // frequency domain coefficients
                         
-ODK_RESULT LP_Filter([IN]  complex   src[1024]     // time domain coefficients
-                   , [OUT] complex   sink[1024]); // imaginary frequency domain coefs
+ODK_RESULT LP_Filter([IN]  complex   freqCoef[1024]     // filter input
+                   , [OUT] complex   freqCoefFilt[1024]); // filter output
                    
-                        
-ODK_RESULT IFFT1024p([IN]   complex     freqCoefRe[1024]   // frequency domain coefs
-                  ,  [OUT]  ODK_INT16   timeCoef[1024]);   // time domain coefficients
+ODK_RESULT IFFT1024p([IN]   complex     freqCoef[1024]   // frequency domain coefficients
+                  ,  [OUT]  ODK_INT16   timeCoefOut[1024]);   // time domain coefficients
                   
+ODK_RESULT FFT_Filt([IN]    ODK_INT16   timeCoef[1024]     // time domain input coefficients
+                  , [OUT]   ODK_INT16   timeCoefOut[1024]);  // time domain output coefficients
                         

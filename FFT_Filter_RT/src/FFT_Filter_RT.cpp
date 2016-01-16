@@ -1,8 +1,12 @@
 #include "ODK_Functions.h"
-#include <stdlib.h>
 #include "complex.h"
 #include "FFT_1024.h"
 #include "BP_Filter.h"
+
+#ifdef _DEBUG
+#include "debug_param.h"
+#include <stdio.h>
+#endif
 
 BP_Filter MyFiler;
 FFT_1024 MyFFT;
@@ -75,6 +79,15 @@ int main (int argc, char* argv[])
     // error handling
 
     // place your test code here
+    for(int i = 0; i < 10; i++)
+    {
+    	short test_output[BLOCK_LEN];
+    	ret = FFT_Filt(&(test_input[i*BLOCK_LEN]), test_output);
+    	for(int j = 0; j < BLOCK_LEN; j++)
+    	{
+    		printf("%d, \n",test_output[j]);
+    	}
+    }
 
     ret = OnStop();
     // error handling
@@ -100,9 +113,19 @@ ODK_RESULT LP_Filter (const  complex src[BLOCK_LEN], complex sink[BLOCK_LEN])
 	return ODK_SUCCESS;
 }
 
-ODK_RESULT IFFT1024p (const complex freqCoef[BLOCK_LEN], ODK_INT16 timeCoef[BLOCK_LEN])
+ODK_RESULT IFFT1024p (const complex freqCoef[BLOCK_LEN], ODK_INT16 timeCoefOut[BLOCK_LEN])
 {
-	MyFFT.IFFT_1024_mono(freqCoef, timeCoef);
+	MyFFT.IFFT_1024_mono(freqCoef, timeCoefOut);
+	return ODK_SUCCESS;
+}
+
+ODK_RESULT FFT_Filt (const ODK_INT16 timeCoef[BLOCK_LEN], ODK_INT16 timeCoefOut[BLOCK_LEN])
+{
+	complex freqCoef[BLOCK_LEN];
+	complex freqCoefFilt[BLOCK_LEN];
+	MyFFT.FFT_1024_mono(timeCoef, freqCoef);
+	MyFiler.low_pass_mono(freqCoef, freqCoefFilt);
+	MyFFT.IFFT_1024_mono(freqCoefFilt, timeCoefOut);
 	return ODK_SUCCESS;
 }
 
