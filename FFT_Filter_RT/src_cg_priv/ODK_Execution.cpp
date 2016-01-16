@@ -2,8 +2,8 @@
  * This file is ALWAYS GENERATED - DO NOT MODIFY this file.
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 200.0.1202.1
- * at Mon January 11 21:28:43 2016
+ * File created by ODK_CodeGenerator version 2.0.0.0
+ * at Sat January 16 21:14:08 2016
 */
 
 #include "ODK_Functions.h"
@@ -15,7 +15,6 @@
 #include <time.h>
 
 #define ODK_COMMAND_NOT_IMPLEMENTED    0x8098 
-
 #define MAX_LOG_ENTRY_LEN 				126
 #define MAX_USER_TRACE_LEN				(100)
 typedef struct TraceEntry_s
@@ -37,6 +36,7 @@ volatile unsigned short g_currentOBnumber = 0;
 ODK_UINT64 g_tickResolutionPerSec = (ODK_UINT64) 1u;
 ODK_UINT64 g_tickTimeBase = 0;
 struct tm  g_TimeInfoBase = {0};
+ODK_UINT32 g_ODK1500sBuildVersion = (2 << 24) + (0 << 16) + (0 << 8) + 0;
 ODK_UINT8  g_SyncCallParallelCount = 3;
 ODK_UINT32 g_SyncCallStackSize = (32 * 1024);
 ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
@@ -69,7 +69,9 @@ ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
 //command enums
 typedef enum CommandHash_e
 {
-  FCT_HASH_FFT1024p = 0xCD220AC6,
+  FCT_HASH_FFT1024p = 0x7FB2D675,
+  FCT_HASH_LP_Filter = 0xF6946EE5,
+  FCT_HASH_IFFT1024p = 0x9F759A19,
   FCT_HASH_GetTrace = 0xC4B4F52B
 }CommandHash_t;
 
@@ -83,7 +85,15 @@ ODK_RESULT Execute (ODK_UINT32        cmd
   {
     case FCT_HASH_FFT1024p:
     {
-      return FFT1024p ((ODK_UINT16*) &(in[0]), (ODK_FLOAT*) &(out[0]), (ODK_FLOAT*) &(out[4096]));
+      return FFT1024p ((ODK_INT16*) &(in[0]), (ODK_FLOAT*) &(out[0]), (ODK_FLOAT*) &(out[4096]));
+    }
+    case FCT_HASH_LP_Filter:
+    {
+      return LP_Filter ((ODK_FLOAT*) &(in[0]), (ODK_FLOAT*) &(in[4096]), (ODK_FLOAT*) &(out[0]), (ODK_FLOAT*) &(out[4096]));
+    }
+    case FCT_HASH_IFFT1024p:
+    {
+      return IFFT1024p ((ODK_FLOAT*) &(in[0]), (ODK_FLOAT*) &(in[4096]), (ODK_INT16*) &(out[0]));
     }
     case FCT_HASH_GetTrace:
     {

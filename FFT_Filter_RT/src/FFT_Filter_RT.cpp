@@ -86,16 +86,29 @@ int main (int argc, char* argv[])
 
 
 
-ODK_RESULT FFT1024p (const ODK_UINT16 timeCoef[BLOCK_LEN], ODK_FLOAT freqCoefRe[BLOCK_LEN], ODK_FLOAT freqCoefIm[1024])
+ODK_RESULT FFT1024p (const ODK_INT16 timeCoef[BLOCK_LEN], ODK_FLOAT freqCoefRe[BLOCK_LEN], ODK_FLOAT freqCoefIm[1024])
 {
-	Complex freqCoef[BLOCK_LEN];
+	complex freqCoef[BLOCK_LEN];
 	MyFFT.FFT_1024_mono(timeCoef, freqCoef);
 	// place your code here
 	for(int i = 0; i < BLOCK_LEN; i++)
 	{
-		freqCoefRe[i] = freqCoef[i].GetReal();
-		freqCoefIm[i] = freqCoef[i].GetImag();
+		freqCoefRe[i] = freqCoef[i].real;
+		freqCoefIm[i] = freqCoef[i].imag;
 	}
+
+	return ODK_SUCCESS;
+}
+
+ODK_RESULT LP_Filter (const  ODK_FLOAT inRe[BLOCK_LEN], const ODK_FLOAT inIm[1024], ODK_FLOAT outRe[BLOCK_LEN], ODK_FLOAT outIm[1024])
+{
+
+	return ODK_SUCCESS;
+}
+
+ODK_RESULT IFFT1024p (const ODK_FLOAT freqCoefRe[BLOCK_LEN], const ODK_FLOAT freqCoefIm[1024], ODK_INT16 timeCoef[BLOCK_LEN])
+{
+
 
 	return ODK_SUCCESS;
 }

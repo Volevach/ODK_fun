@@ -41,8 +41,29 @@ STEP7Prefix=FFT_Filter_RT
  */
 
 // Basic function in order to show 
+
+ODK_STRUCT complex 
+{ 
+	ODK_FLOAT re;
+	ODK_FLOAT im;
+}; 
+
                         
-ODK_RESULT FFT1024p([IN]    ODK_UINT16  timeCoef[1024]     // time domain coefficients
-                  , [OUT]   ODK_FLOAT   freqCoefRe[1024]	  // real frequency domain coefs
+ODK_RESULT FFT1024p([IN]    ODK_INT16   timeCoef[1024]     // time domain coefficients
+                  , [OUT]   ODK_FLOAT   freqCoefRe[1024]   // real frequency domain coefs
                   , [OUT]   ODK_FLOAT   freqCoefIm[1024]); // imaginary frequency domain coefs
+                        
+ODK_RESULT LP_Filter([IN]  ODK_FLOAT   inRe[1024]     // time domain coefficients
+			 	   , [IN]  ODK_FLOAT   inIm[1024]     // time domain coefficients
+                   , [OUT] ODK_FLOAT   outRe[1024]   // real frequency domain coefs
+                   , [OUT] ODK_FLOAT   outIm[1024]); // imaginary frequency domain coefs
+                   
+ODK_RESULT LP_Filter2([IN]  ODK_STRUCT   src[1024]     // time domain coefficients
+                   , [OUT] ODK_STRUCT   sink[1024]); // imaginary frequency domain coefs
+                        
+                        
+ODK_RESULT IFFT1024p([IN]   ODK_FLOAT   freqCoefRe[1024]   // real frequency domain coefs
+                  ,  [IN]   ODK_FLOAT   freqCoefIm[1024]   // imaginary frequency domain coefs
+                  ,  [OUT]  ODK_INT16   timeCoef[1024]);   // time domain coefficients
+                  
                         

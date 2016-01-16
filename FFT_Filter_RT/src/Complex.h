@@ -1,21 +1,11 @@
-#pragma once
-class Complex
+
+typedef struct complex
 {
-public:
-    Complex(void);
-    Complex(float, float);
-    ~Complex(void);
+    float re;
+    float im;
+} complex;
 
-    float GetReal();
-    float GetImag();
-    Complex ConjCompl();
-
-private:
-    float real;
-    float imag;
-
-};
-
-Complex compAdd(Complex a, Complex b);
-Complex compSub(Complex a, Complex b);
-Complex compMul(Complex a, Complex b);
+complex ConjCompl(complex a);
+complex compAdd(complex a, complex b);
+complex compSub(complex a, complex b);
+complex compMul(complex a, complex b);

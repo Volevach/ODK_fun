@@ -1,16 +1,17 @@
 #include "BP_Filter.h"
-
+#include "defines.h"
+#include "Complex.h"
 
 BP_Filter::BP_Filter(void)
 {
     unsigned int i = 0;
     FFT_1024 MyFFT = FFT_1024();
 
-    flt_scale = Complex(65536.0, 65536.0);
-    flt_scale_inv = Complex(1.0/65536.0, 1.0/65536.0);
+    flt_scale = complex(65536.0, 65536.0);
+    flt_scale_inv = complex(1.0/65536.0, 1.0/65536.0);
 
     // zero pad the filter coef
-    unsigned short filt_coef_zero[BLOCK_LEN] = {0};
+    short filt_coef_zero[BLOCK_LEN] = {0};
     for(i = 0; i < FILT_LEN; i++)
     {
         filt_coef_zero[i] = (unsigned short)(filt_coef[i] * 65536.0);
@@ -31,7 +32,7 @@ BP_Filter::~BP_Filter(void)
 {
 }
 
-void BP_Filter::low_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2])
+void BP_Filter::low_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2])
 {
     unsigned int i;
     for(i = 0; i < BLOCK_LEN; i++)
@@ -41,17 +42,17 @@ void BP_Filter::low_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_L
     }
 }
 
-void BP_Filter::high_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2])
+void BP_Filter::high_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2])
 {
 
 }
 
-void BP_Filter::band_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2])
+void BP_Filter::band_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2])
 {
 
 }
 
-void BP_Filter::sig_filter(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2], Complex filter_par[BLOCK_LEN])
+void BP_Filter::sig_filter(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2], complex filter_par[BLOCK_LEN])
 {
 
 }

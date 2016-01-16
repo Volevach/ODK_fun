@@ -1,5 +1,6 @@
 #include "FFT_1024.h"
 
+
 FFT_1024::FFT_1024(void)
 {
     unsigned short i = 0;
@@ -16,11 +17,11 @@ FFT_1024::FFT_1024(void)
     for(i = 0; i < STAGES; i++)
     {
         d_fac[i] = d;
-        twiddle_fac[i] = Complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        twiddle_fac[i] = complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
         d <<= 1;
     }
 
-    w_0 = Complex(1.0, 0.0);
+    w_0 = complex(1.0, 0.0);
 }
 
 
@@ -29,24 +30,24 @@ FFT_1024::~FFT_1024(void)
 
 }
 
-void FFT_1024::FFT_1024_mono(const unsigned short time_coef[BLOCK_LEN], Complex freq_coef[BLOCK_LEN])
+void FFT_1024::FFT_1024_mono(const short time_coef[BLOCK_LEN], complex freq_coef[BLOCK_LEN])
 {
     int n, d, k, m;
 
-    Complex w;
-    Complex wd;
-    Complex t;
-    Complex x;
+    complex w;
+    complex wd;
+    complex t;
+    complex x;
 
     bitReverse_to_complx(time_coef, freq_coef);
 
     for(n = 1; n <= 10; n++)
     {
         d = (int)(pow(2.0,n));
-        wd = Complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        wd = complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
         for(k = 0; k < BLOCK_LEN; k+=d)
         {
-            w = Complex(1.0, 0.0);
+            w = complex(1.0, 0.0);
             for(m = 0; m < (d/2); m++)
             {
 
@@ -62,14 +63,14 @@ void FFT_1024::FFT_1024_mono(const unsigned short time_coef[BLOCK_LEN], Complex 
     }
 }
 
-void FFT_1024::FFT_1024_stereo(const unsigned short time_coef[BLOCK_LEN][2], Complex freq_coef[BLOCK_LEN][2])
+void FFT_1024::FFT_1024_stereo(const short time_coef[BLOCK_LEN][2], complex freq_coef[BLOCK_LEN][2])
 {
     int n, d, k, m;
 
-    Complex w;
-    Complex wd;
-    Complex t;
-    Complex x;
+    complex w;
+    complex wd;
+    complex t;
+    complex x;
 
     bitReverse_to_complx2(time_coef, freq_coef);
 
@@ -101,22 +102,22 @@ void FFT_1024::FFT_1024_stereo(const unsigned short time_coef[BLOCK_LEN][2], Com
     }
 }
 
-void FFT_1024::IFFT_1024_stereo(const Complex freq_coef[BLOCK_LEN][2], unsigned short time_coef[BLOCK_LEN][2])
+void FFT_1024::IFFT_1024_stereo(const complex freq_coef[BLOCK_LEN][2], short time_coef[BLOCK_LEN][2])
 {
     int n, d, k, m;
 
-    Complex w;
-    Complex wd;
-    Complex t;
-    Complex x;
-    Complex freq_coef_rev[BLOCK_LEN][2];
+    complex w;
+    complex wd;
+    complex t;
+    complex x;
+    complex freq_coef_rev[BLOCK_LEN][2];
 
     bitReverse(freq_coef, freq_coef_rev);
 
     for(n = 1; n <= 10; n++)
     {
         d = d_fac[n-1];
-        wd = twiddle_fac[n-1].ConjCompl();
+        wd = ConjCompl(twiddle_fac[n-1]);
         for(k = 0; k < BLOCK_LEN; k+=d)
         {
             w = w_0;
@@ -142,13 +143,13 @@ void FFT_1024::IFFT_1024_stereo(const Complex freq_coef[BLOCK_LEN][2], unsigned 
 
     for(n = 0; n < BLOCK_LEN; n++)
     {
-        time_coef[n][0] = (short)( ((int)freq_coef_rev[n][0].GetReal()) >> 10);
-        time_coef[n][1] = (short)( ((int)freq_coef_rev[n][1].GetReal()) >> 10);
+        time_coef[n][0] = (short)( ((int)freq_coef_rev[n][0].real) >> 10);
+        time_coef[n][1] = (short)( ((int)freq_coef_rev[n][1].real) >> 10);
     }
 }
 
 
-void FFT_1024::bitReverse(const Complex a[BLOCK_LEN][2], Complex b[BLOCK_LEN][2])
+void FFT_1024::bitReverse(const complex a[BLOCK_LEN][2], complex b[BLOCK_LEN][2])
 {
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
@@ -158,21 +159,21 @@ void FFT_1024::bitReverse(const Complex a[BLOCK_LEN][2], Complex b[BLOCK_LEN][2]
     }
 }
 
-void FFT_1024::bitReverse_to_complx2(const unsigned short a[BLOCK_LEN][2], Complex b[BLOCK_LEN][2])
+void FFT_1024::bitReverse_to_complx2(const short a[BLOCK_LEN][2], complex b[BLOCK_LEN][2])
 {
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i][0] = Complex((float)a[bitRevInd[i]][0], 0.0);
-        b[i][1] = Complex((float)a[bitRevInd[i]][1], 0.0);
+        b[i][0] = complex((float)a[bitRevInd[i]][0], 0.0);
+        b[i][1] = complex((float)a[bitRevInd[i]][1], 0.0);
     }
 }
 
-void FFT_1024::bitReverse_to_complx(const unsigned short a[BLOCK_LEN], Complex b[BLOCK_LEN])
+void FFT_1024::bitReverse_to_complx(const short a[BLOCK_LEN], complex b[BLOCK_LEN])
 {
     int i = 0;
     for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i] = Complex((float)a[bitRevInd[i]],0.0);
+        b[i] = complex((float)a[bitRevInd[i]],0.0);
     }
 }

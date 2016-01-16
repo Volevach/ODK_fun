@@ -1,5 +1,4 @@
 #pragma once
-#include "defines.h"
 #include "complex.h"
 #include "FFT_1024.h"
 
@@ -10,15 +9,15 @@ class BP_Filter
 public:
     BP_Filter(void);
     ~BP_Filter(void);
-    void low_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2]);
-    void high_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2]);
-    void band_pass(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2]);
-    void sig_filter(Complex src_sig[BLOCK_LEN][2], Complex sink_sig[BLOCK_LEN][2], Complex filter_par[BLOCK_LEN]);
+    void low_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
+    void high_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
+    void band_pass(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2]);
+    void sig_filter(const complex src_sig[BLOCK_LEN][2], complex sink_sig[BLOCK_LEN][2], complex filter_par[BLOCK_LEN]);
 
 private:
-    Complex filt_coef_freq[BLOCK_LEN];
-    Complex flt_scale;
-    Complex flt_scale_inv;
+    complex filt_coef_freq[BLOCK_LEN];
+    complex flt_scale;
+    complex flt_scale_inv;
 };
 
 const double filt_coef[FILT_LEN] =
