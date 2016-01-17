@@ -1,6 +1,9 @@
 #include "stdafx.h"
 #include "ODK_Functions.h"
 #include "tchar.h"
+#include "WaveProc.h"
+
+WaveProc MyWave;
 
 /*
  * OnLoad() is invoked after the application binary was loaded.
@@ -13,6 +16,7 @@
 EXPORT_API ODK_RESULT OnLoad (void)
 {
     // place your code here
+	MyWave = WaveProc();
     return ODK_SUCCESS;
 }
 
@@ -52,22 +56,29 @@ EXPORT_API ODK_RESULT OnStop (void)
 }
 
 
-/*
- * SampleFunction() is defined in ODK_Functions.h.
- * ODK_Functions.h is automatically generated from Interface.odk.
- */
-ODK_RESULT SampleFunction (const ODK_INT32& myInt, ODK_BOOL& myBool, ODK_DOUBLE& myReal)
+// Setup file handles for IO operation
+ODK_RESULT WaveSetup(
+	/*IN*/ const ODK_S7STRING inFileName[256],// input wave
+	/*IN*/ const ODK_S7STRING outFileName[256]// output to write to
+	)
 {
-    // place your code here
-	
-    _TCHAR szLog[1024];
-    const int bufferSize = sizeof(szLog)/sizeof(szLog[0]) - 1;
-    int len = _sntprintf_s(szLog, bufferSize, _T("SampleFunction(myInt=%d, myBool=%d, myReal=%lf)"), myInt, myBool, myReal);
-    if (0 < len)
-    {
-        szLog[len] = 0;
-        OutputDebugString(szLog);
-    }
-	
-    return ODK_SUCCESS;
+	return ODK_SUCCESS;
+}
+
+// Get one filter samlple for processing   
+ODK_RESULT GetSamplesStereo(
+	/*OUT*/ ODK_INT8 inputSamplesL[1024],// input audio samples left
+	/*OUT*/ ODK_INT8 inputSamplesR[1024]// input audio samples right
+	)
+{
+	return ODK_SUCCESS;
+}
+
+// write processed sample frame into file
+ODK_RESULT WriteSamples(
+	/*IN*/ const ODK_INT8 filteredSamplesL[1024],// output to write to left chan
+	/*IN*/ const ODK_INT8 filteredSamplesR[1024]// output to write to right chan
+	)
+{
+	return ODK_SUCCESS;
 }

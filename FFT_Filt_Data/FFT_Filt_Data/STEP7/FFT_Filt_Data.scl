@@ -3,7 +3,7 @@ FUNCTION_BLOCK "FFT_Filt_Data_Load"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 14:07:32 2016
+//at Sun January 17 16:46:34 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -20,7 +20,7 @@ VERSION : 0.1
     _odk_internal_LIBRARY_NAME : String := '<nrt>FFT_Filt_Data.dll';
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 367433761;
+    _odk_internal_INSTANCE_ID : UDInt := 470524129;
   END_VAR
 BEGIN
 //
@@ -49,7 +49,7 @@ FUNCTION_BLOCK "FFT_Filt_Data_Unload"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 14:07:32 2016
+//at Sun January 17 16:46:34 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -65,7 +65,7 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 367433761;
+    _odk_internal_INSTANCE_ID : UDInt := 470524129;
   END_VAR
 BEGIN
  //
@@ -89,46 +89,43 @@ BEGIN
 END_FUNCTION_BLOCK
 
 
-FUNCTION_BLOCK "FFT_Filt_DataSampleFunction"
+FUNCTION_BLOCK "FFT_Filt_DataWaveSetup"
 { S7_Optimized_Access := 'TRUE'} 
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 14:07:32 2016
+//at Sun January 17 16:46:34 2016
 //********************************************************
-// Basic function in order to show 
-// how to create a function in ODK 1500S.
+// Setup file handles for IO operation
   VAR_INPUT
     REQ : Bool;
-    myInt : DINT;// integer value as input
+    inFileName : STRING[254];// input wave
+    outFileName : STRING[254];// output to write to
   END_VAR
   VAR_OUTPUT
     ERROR : Bool := false;
     DONE : Bool := false;
     BUSY : Bool := false;
     STATUS : INT := 0;
-    myBool : BOOL;// bool value as output
-  END_VAR
-  VAR_IN_OUT
-    myReal : LREAL;// double value as input and output
+
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
     _odk_internal_Last_BUSY : Bool := false;
     ODK_ExcA_Instance {OriginalPartName :=
             'ODK_ExcA_SFB_2013'; LibVersion := '1.0'} : ODK_ExcA;
-    _odk_internal_IN_BUFFER : Array [0..3] of Byte;
-    _odk_internal_INOUT_BUFFER : Array [0..7] of Byte;
-    _odk_internal_OUT_BUFFER : Array [0..0] of Byte;
+    _odk_internal_IN_BUFFER : Array [0..511] of Byte;
   END_VAR
   VAR_TEMP 
     _odk_internal_pos : DInt;
     _odk_internal_err : Int;
     _odk_internal_i : Int;
+    _odk_internal_tmpStringLen : Byte;
+    _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 367433761;
-    _odk_internal_COMMAND : UDINT := 3107654488;
+    _odk_internal_INSTANCE_ID : UDINT := 470524129;
+    _odk_internal_COMMAND : UDINT := 2507301330;
   END_VAR
 BEGIN
 //
@@ -137,20 +134,101 @@ BEGIN
 // ODK_CodeGenerator version 2.0.0.0
 // DO NOT CHANGE !!
 //
-// Basic function in order to show 
-// how to create a function in ODK 1500S.
+// Setup file handles for IO operation
   IF NOT #_odk_internal_Last_REQ & #REQ & NOT #BUSY THEN
     #_odk_internal_pos := 0;
-    #_odk_internal_err := WRITE_LITTLE ( src_variable := #myInt, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
-    #_odk_internal_pos := 0;
-    #_odk_internal_err := WRITE_LITTLE ( src_variable := #myReal, dest_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);    
+    #_odk_internal_tmpStringLen := INT_TO_BYTE (LEN(inFileName));
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := BYTE#254;
+    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := _odk_internal_tmpStringLen;
+    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    FOR #_odk_internal_i := 1 TO BYTE_TO_INT(#_odk_internal_tmpStringLen) DO
+      #_odk_internal_IN_BUFFER[#_odk_internal_pos] := CHAR_TO_BYTE(#inFileName[#_odk_internal_i]);
+      #_odk_internal_pos  := #_odk_internal_pos + 1;
+    END_FOR;
+    #_odk_internal_pos  := #_odk_internal_pos + 254 - #_odk_internal_tmpStringLen;
+    #_odk_internal_tmpStringLen := INT_TO_BYTE (LEN(outFileName));
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := BYTE#254;
+    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    #_odk_internal_IN_BUFFER[#_odk_internal_pos] := _odk_internal_tmpStringLen;
+    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    FOR #_odk_internal_i := 1 TO BYTE_TO_INT(#_odk_internal_tmpStringLen) DO
+      #_odk_internal_IN_BUFFER[#_odk_internal_pos] := CHAR_TO_BYTE(#outFileName[#_odk_internal_i]);
+      #_odk_internal_pos  := #_odk_internal_pos + 1;
+    END_FOR;
+    #_odk_internal_pos  := #_odk_internal_pos + 254 - #_odk_internal_tmpStringLen;
+    
   END_IF;
   #_odk_internal_Last_REQ := #REQ;	
   #ODK_ExcA_Instance(REQ:=#REQ,
                      INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
                      COMMAND:=#_odk_internal_COMMAND,
                      IN_DATA:=#_odk_internal_IN_BUFFER,
-                     INOUT_DATA:=#_odk_internal_INOUT_BUFFER,
+                     INOUT_DATA:=_odk_internal_tmpDefaultValue,
+                     OUT_DATA:=_odk_internal_tmpDefaultValue,
+                     DONE=>#DONE,
+                     BUSY=>#BUSY,
+                     ERROR=>#ERROR,
+                     STATUS=>#STATUS);
+//
+// DO NOT CHANGE !!
+// This is an automatic generated block by the
+// ODK_CodeGenerator version 2.0.0.0
+// DO NOT CHANGE ABOVE OF THIS LINE !!
+//
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "FFT_Filt_DataGetSamplesStereo"
+{ S7_Optimized_Access := 'TRUE'} 
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 2.0.0.0
+//at Sun January 17 16:46:34 2016
+//********************************************************
+// Get one filter samlple for processing   
+  VAR_INPUT
+    REQ : Bool;
+
+  END_VAR
+  VAR_OUTPUT
+    ERROR : Bool := false;
+    DONE : Bool := false;
+    BUSY : Bool := false;
+    STATUS : INT := 0;
+    inputSamplesL : Array[0..1023] of SINT;// input audio samples left
+    inputSamplesR : Array[0..1023] of SINT;// input audio samples right
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    ODK_ExcA_Instance {OriginalPartName :=
+            'ODK_ExcA_SFB_2013'; LibVersion := '1.0'} : ODK_ExcA;
+    _odk_internal_OUT_BUFFER : Array [0..2047] of Byte;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : Int;
+    _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 470524129;
+    _odk_internal_COMMAND : UDINT := 1362676486;
+  END_VAR
+BEGIN
+//
+// DO NOT CHANGE BELOW OF THIS LINE !!
+// This is an automatic generated block by the
+// ODK_CodeGenerator version 2.0.0.0
+// DO NOT CHANGE !!
+//
+// Get one filter samlple for processing   
+  #_odk_internal_Last_REQ := #REQ;	
+  #ODK_ExcA_Instance(REQ:=#REQ,
+                     INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                     COMMAND:=#_odk_internal_COMMAND,
+                     IN_DATA:=_odk_internal_tmpDefaultValue,
+                     INOUT_DATA:=_odk_internal_tmpDefaultValue,
                      OUT_DATA:=#_odk_internal_OUT_BUFFER,
                      DONE=>#DONE,
                      BUSY=>#BUSY,
@@ -158,12 +236,88 @@ BEGIN
                      STATUS=>#STATUS);
   IF NOT #BUSY & #_odk_internal_Last_BUSY & NOT #ERROR THEN
     #_odk_internal_pos := 0;
-    #_odk_internal_err := READ_LITTLE (dest_variable  := #myReal, src_array := #_odk_internal_INOUT_BUFFER,  pos := #_odk_internal_pos);
-    #_odk_internal_pos := 0;
-    myBool := BYTE_TO_BOOL(#_odk_internal_OUT_BUFFER[#_odk_internal_pos]);
-    #_odk_internal_pos  := #_odk_internal_pos + 1;
+    FOR #_odk_internal_i := 0 to 1023 DO
+      #_odk_internal_err := READ_LITTLE (dest_variable  := #inputSamplesL[#_odk_internal_i], src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    END_FOR;
+    FOR #_odk_internal_i := 0 to 1023 DO
+      #_odk_internal_err := READ_LITTLE (dest_variable  := #inputSamplesR[#_odk_internal_i], src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
+    END_FOR;
   END_IF;
   #_odk_internal_Last_BUSY := #BUSY;
+//
+// DO NOT CHANGE !!
+// This is an automatic generated block by the
+// ODK_CodeGenerator version 2.0.0.0
+// DO NOT CHANGE ABOVE OF THIS LINE !!
+//
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "FFT_Filt_DataWriteSamples"
+{ S7_Optimized_Access := 'TRUE'} 
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 2.0.0.0
+//at Sun January 17 16:46:34 2016
+//********************************************************
+// write processed sample frame into file
+  VAR_INPUT
+    REQ : Bool;
+    filteredSamplesL : Array[0..1023] of SINT;// output to write to left chan
+    filteredSamplesR : Array[0..1023] of SINT;// output to write to right chan
+  END_VAR
+  VAR_OUTPUT
+    ERROR : Bool := false;
+    DONE : Bool := false;
+    BUSY : Bool := false;
+    STATUS : INT := 0;
+
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    ODK_ExcA_Instance {OriginalPartName :=
+            'ODK_ExcA_SFB_2013'; LibVersion := '1.0'} : ODK_ExcA;
+    _odk_internal_IN_BUFFER : Array [0..2047] of Byte;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : Int;
+    _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 470524129;
+    _odk_internal_COMMAND : UDINT := 3004659663;
+  END_VAR
+BEGIN
+//
+// DO NOT CHANGE BELOW OF THIS LINE !!
+// This is an automatic generated block by the
+// ODK_CodeGenerator version 2.0.0.0
+// DO NOT CHANGE !!
+//
+// write processed sample frame into file
+  IF NOT #_odk_internal_Last_REQ & #REQ & NOT #BUSY THEN
+    #_odk_internal_pos := 0;
+    FOR #_odk_internal_i := 0 to 1023 DO
+      #_odk_internal_err := WRITE_LITTLE ( src_variable := #filteredSamplesL[#_odk_internal_i], dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+    END_FOR;
+    FOR #_odk_internal_i := 0 to 1023 DO
+      #_odk_internal_err := WRITE_LITTLE ( src_variable := #filteredSamplesR[#_odk_internal_i], dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
+    END_FOR;
+    
+  END_IF;
+  #_odk_internal_Last_REQ := #REQ;	
+  #ODK_ExcA_Instance(REQ:=#REQ,
+                     INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                     COMMAND:=#_odk_internal_COMMAND,
+                     IN_DATA:=#_odk_internal_IN_BUFFER,
+                     INOUT_DATA:=_odk_internal_tmpDefaultValue,
+                     OUT_DATA:=_odk_internal_tmpDefaultValue,
+                     DONE=>#DONE,
+                     BUSY=>#BUSY,
+                     ERROR=>#ERROR,
+                     STATUS=>#STATUS);
 //
 // DO NOT CHANGE !!
 // This is an automatic generated block by the

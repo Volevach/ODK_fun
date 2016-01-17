@@ -39,8 +39,15 @@ STEP7Prefix=FFT_Filt_Data
  *                   0xF000...0xFFFF function failed
  */
 
-// Basic function in order to show 
-// how to create a function in ODK 1500S.
-ODK_RESULT SampleFunction([IN]    ODK_INT32    myInt		// integer value as input
-                        , [OUT]   ODK_BOOL     myBool		// bool value as output
-                        , [INOUT] ODK_DOUBLE   myReal);		// double value as input and output
+
+// Setup file handles for IO operation
+ODK_RESULT WaveSetup([IN]    ODK_S7STRING    inFileName		// input wave
+                   , [IN]    ODK_S7STRING    outFileName);	// output to write to
+                   
+// Get one filter samlple for processing   
+ODK_RESULT GetSamplesStereo([OUT]   ODK_INT8   inputSamplesL[1024]  	// input audio samples left
+						,	[OUT]   ODK_INT8   inputSamplesR[1024]);	// input audio samples right
+
+// write processed sample frame into file
+ODK_RESULT WriteSamples([IN]   ODK_INT8 filteredSamplesL[1024]		// output to write to left chan
+					,	[IN]   ODK_INT8 filteredSamplesR[1024]);	// output to write to right chan
