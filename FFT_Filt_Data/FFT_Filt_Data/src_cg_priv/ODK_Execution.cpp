@@ -3,7 +3,7 @@
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sun January 17 16:46:33 2016
+ * at Sun January 17 17:54:04 2016
 */
 
 #include "ODK_Functions.h"
@@ -14,8 +14,8 @@ ODK_UINT32 g_ODK1500sBuildVersion = (2 << 24) + (0 << 16) + (0 << 8) + 0;
 typedef enum CommandHash_e
 {
   FCT_HASH_WaveSetup = 0x957261D2,
-  FCT_HASH_GetSamplesStereo = 0x5138CB06,
-  FCT_HASH_WriteSamples = 0xB31777CF
+  FCT_HASH_GetSamplesStereo = 0xBAEFE192,
+  FCT_HASH_WriteSamples = 0x9EA4D02E
 }CommandHash_t;
 
 //Execute()
@@ -32,11 +32,11 @@ EXPORT_API ODK_RESULT Execute (ODK_UINT32        cmd
     }
     case FCT_HASH_GetSamplesStereo:
     {
-      return GetSamplesStereo ((ODK_INT8*) &(out[0]), (ODK_INT8*) &(out[1024]));
+      return GetSamplesStereo ((ODK_INT16*) &(out[0]), (ODK_INT16*) &(out[2048]), *((ODK_BOOL*) &(out[4096])));
     }
     case FCT_HASH_WriteSamples:
     {
-      return WriteSamples ((ODK_INT8*) &(in[0]), (ODK_INT8*) &(in[1024]));
+      return WriteSamples ((ODK_INT16*) &(in[0]), (ODK_INT16*) &(in[2048]));
     }
     default:
     {

@@ -3,7 +3,7 @@
  * This file contains the function prototypes the user defined.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sun January 17 16:46:34 2016 
+ * at Sun January 17 17:54:04 2016 
 */
 
 #if !defined    ODK_Functions_H 
@@ -26,17 +26,18 @@ ODK_RESULT WaveSetup (
 
 // Get one filter samlple for processing   
 ODK_RESULT GetSamplesStereo (
-  /*OUT*/ ODK_INT8 inputSamplesL[1024],// input audio samples left
-  /*OUT*/ ODK_INT8 inputSamplesR[1024]// input audio samples right
+  /*OUT*/ ODK_INT16 inputSamplesL[1024],// input audio samples left
+  /*OUT*/ ODK_INT16 inputSamplesR[1024],// input audio samples right
+  /*OUT*/ ODK_BOOL& lastSample// last sample indicator
 );
-#define _ODK_FUNCTION_GETSAMPLESSTEREO  ODK_RESULT GetSamplesStereo (/*OUT*/ ODK_INT8 inputSamplesL[1024], /*OUT*/ ODK_INT8 inputSamplesR[1024])
+#define _ODK_FUNCTION_GETSAMPLESSTEREO  ODK_RESULT GetSamplesStereo (/*OUT*/ ODK_INT16 inputSamplesL[1024], /*OUT*/ ODK_INT16 inputSamplesR[1024], /*OUT*/ ODK_BOOL& lastSample)
 
 // write processed sample frame into file
 ODK_RESULT WriteSamples (
-  /*IN*/ const ODK_INT8 filteredSamplesL[1024],// output to write to left chan
-  /*IN*/ const ODK_INT8 filteredSamplesR[1024]// output to write to right chan
+  /*IN*/ const ODK_INT16 filteredSamplesL[1024],// output to write to left chan
+  /*IN*/ const ODK_INT16 filteredSamplesR[1024]// output to write to right chan
 );
-#define _ODK_FUNCTION_WRITESAMPLES  ODK_RESULT WriteSamples (/*IN*/ const ODK_INT8 filteredSamplesL[1024], /*IN*/ const ODK_INT8 filteredSamplesR[1024])
+#define _ODK_FUNCTION_WRITESAMPLES  ODK_RESULT WriteSamples (/*IN*/ const ODK_INT16 filteredSamplesL[1024], /*IN*/ const ODK_INT16 filteredSamplesR[1024])
 
 #endif
 

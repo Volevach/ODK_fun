@@ -45,9 +45,10 @@ ODK_RESULT WaveSetup([IN]    ODK_S7STRING    inFileName		// input wave
                    , [IN]    ODK_S7STRING    outFileName);	// output to write to
                    
 // Get one filter samlple for processing   
-ODK_RESULT GetSamplesStereo([OUT]   ODK_INT8   inputSamplesL[1024]  	// input audio samples left
-						,	[OUT]   ODK_INT8   inputSamplesR[1024]);	// input audio samples right
+ODK_RESULT GetSamplesStereo([OUT]   ODK_INT16   inputSamplesL[1024]  	// input audio samples left
+						,	[OUT]   ODK_INT16   inputSamplesR[1024] 	// input audio samples right
+						,	[OUT]   ODK_BOOL    lastSample);	// last sample indicator
 
 // write processed sample frame into file
-ODK_RESULT WriteSamples([IN]   ODK_INT8 filteredSamplesL[1024]		// output to write to left chan
-					,	[IN]   ODK_INT8 filteredSamplesR[1024]);	// output to write to right chan
+ODK_RESULT WriteSamples([IN]   ODK_INT16 filteredSamplesL[1024]		// output to write to left chan
+					,	[IN]   ODK_INT16 filteredSamplesR[1024]);	// output to write to right chan

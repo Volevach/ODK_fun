@@ -6,6 +6,7 @@
 WaveProc MyWave;
 FILE *inFile;
 FILE *outFile;
+ODK_INT16 buffer[BLOCK_LEN - NET_LEN][2];
 
 unsigned int loopCnt;
 
@@ -33,6 +34,8 @@ EXPORT_API ODK_RESULT OnLoad (void)
 EXPORT_API ODK_RESULT OnUnload (void)
 {
     // place your code here
+	fclose(inFile);
+	fclose(outFile);
     return ODK_SUCCESS;
 }
 
@@ -100,27 +103,66 @@ ODK_RESULT WaveSetup(
 
 // Get one filter samlple for processing   
 ODK_RESULT GetSamplesStereo(
-	/*OUT*/ ODK_INT8 inputSamplesL[1024],// input audio samples left
-	/*OUT*/ ODK_INT8 inputSamplesR[1024]// input audio samples right
+	/*OUT*/ ODK_INT16 inputSamplesL[1024],// input audio samples left
+	/*OUT*/ ODK_INT16 inputSamplesR[1024],// input audio samples right
+	/*OUT*/ ODK_BOOL& lastSample // last sample indication
 	)
 {
+	unsigned short i = 0;
+	
 	if (loopCnt--)
 	{
+		for (i = 0; i < NET_LEN; i++)
+		{
+			inputSamplesL[i] = MyWave.ReadWord(inFile);
+			inputSamplesR[i] = MyWave.ReadWord(inFile);
+		}
 
+		// zero pad
+		for (i = NET_LEN; i < BLOCK_LEN; i++)
+		{
+			inputSamplesL[i] = 0;
+			inputSamplesR[i] = 0;
+		}
 	}
 	else
 	{
 		return -1;
 	}
 
+	lastSample = (loopCnt == 0);
+
 	return ODK_SUCCESS;
 }
 
 // write processed sample frame into file
 ODK_RESULT WriteSamples(
-	/*IN*/ const ODK_INT8 filteredSamplesL[1024],// output to write to left chan
-	/*IN*/ const ODK_INT8 filteredSamplesR[1024]// output to write to right chan
+	/*IN*/ const ODK_INT16 filteredSamplesL[1024],// output to write to left chan
+	/*IN*/ const ODK_INT16 filteredSamplesR[1024]// output to write to right chan
 	)
 {
+	unsigned short i = 0;
+
+	// write first 30 samples with overlap buffer added
+	for (i = 0; i < (BLOCK_LEN - NET_LEN); i++)
+	{
+		MyWave.WriteWord(outFile, filteredSamplesL[i] + buffer[i][0]);
+		MyWave.WriteWord(outFile, filteredSamplesR[i] + buffer[i][1]);
+	}
+
+	// write the next 964 samles unaltered
+	for (i = (BLOCK_LEN - NET_LEN); i < NET_LEN; i++)
+	{
+		MyWave.WriteWord(outFile, filteredSamplesL[i]);
+		MyWave.WriteWord(outFile, filteredSamplesR[i]);
+	}
+
+	// store the last 30 samples into overlap add buffer
+	for (i = NET_LEN; i < BLOCK_LEN; i++)
+	{
+		buffer[i - NET_LEN][0] = filteredSamplesL[i];
+		buffer[i - NET_LEN][1] = filteredSamplesR[i];
+	}
+
 	return ODK_SUCCESS;
 }
