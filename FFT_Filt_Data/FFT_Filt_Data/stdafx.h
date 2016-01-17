@@ -13,6 +13,9 @@
 // Windows Header Files:
 #include <windows.h>
 
+#define BLOCK_LEN 1024
+#define NET_LEN 994
+#define STAGES 10
 
 
 // TODO: reference additional headers your program requires here

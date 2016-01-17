@@ -4,6 +4,10 @@
 #include "WaveProc.h"
 
 WaveProc MyWave;
+FILE *inFile;
+FILE *outFile;
+
+unsigned int loopCnt;
 
 /*
  * OnLoad() is invoked after the application binary was loaded.
@@ -16,7 +20,6 @@ WaveProc MyWave;
 EXPORT_API ODK_RESULT OnLoad (void)
 {
     // place your code here
-	MyWave = WaveProc();
     return ODK_SUCCESS;
 }
 
@@ -62,6 +65,36 @@ ODK_RESULT WaveSetup(
 	/*IN*/ const ODK_S7STRING outFileName[256]// output to write to
 	)
 {
+	inFile = fopen((const char*) inFileName, "rb");
+	outFile = fopen((const char*)outFileName, "wb");
+
+	
+    char wavPreface[44];
+
+    
+    for(int i = 0; i < 44; i++)
+    {
+        wavPreface[i] = (char)getc(inFile);
+    }
+
+	// initialize the Wave processing class
+	MyWave = WaveProc(wavPreface);
+
+
+	// currently supporting only stereo wave
+	if ((MyWave.GetFormatType() != 1) && (MyWave.GetChannelNum() != 2))
+	{
+		return -1;                   // not stereo wave    
+	}
+
+	// get the amount of 994 samples blocks and the amount of remainder samples
+	int len = MyWave.GetDataLen() / 4;
+	unsigned int rem = len % NET_LEN;
+	loopCnt = (int)((len - rem) / NET_LEN);
+
+	MyWave.WriteHeader(outFile, (loopCnt + 1) * 4 * NET_LEN);
+
+
 	return ODK_SUCCESS;
 }
 
@@ -71,6 +104,15 @@ ODK_RESULT GetSamplesStereo(
 	/*OUT*/ ODK_INT8 inputSamplesR[1024]// input audio samples right
 	)
 {
+	if (loopCnt--)
+	{
+
+	}
+	else
+	{
+		return -1;
+	}
+
 	return ODK_SUCCESS;
 }
 
