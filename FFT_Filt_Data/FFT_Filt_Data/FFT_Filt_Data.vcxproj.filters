@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{f2b3b395-5505-444b-bb62-a62f969d6b13}</UniqueIdentifier>
+      <Extensions>.cpp;.cxx;.c</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{116dea1c-e0ce-4b07-92bf-45b7c44792dd}</UniqueIdentifier>
+      <Extensions>.h;.hpp</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{0fab66e4-41ef-4bf3-9585-a298616e3553}</UniqueIdentifier>
+      <Extensions>.rc;.rc2;.ico;.gif;.bmp;.xml</Extensions>
+    </Filter>
+    <Filter Include="Definition File">
+      <UniqueIdentifier>{84534c3b-630a-47cc-a876-e2399cbf98c9}</UniqueIdentifier>
+      <Extensions>.odk</Extensions>
+    </Filter>
+    <Filter Include="Generated Files">
+      <UniqueIdentifier>{0d870050-4679-486e-a66b-fc30e1f3145c}</UniqueIdentifier>
+      <Extensions>.cpp;.c;.h</Extensions>
+    </Filter>
+    <Filter Include="STEP7">
+      <UniqueIdentifier>{0a756b12-b6fd-4fca-8ff9-36c8232e9909}</UniqueIdentifier>
+      <Extensions>.scl</Extensions>
+    </Filter>
+    <Filter Include="ODK Helpers">
+      <UniqueIdentifier>{09079d00-c47a-42bb-8226-df5cde36fd53}</UniqueIdentifier>
+      <Extensions>.cpp;.c;.h</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FFT_Filt_Data.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src_cg_priv\ODK_Execution.cpp">
+      <Filter>Generated Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_CpuReadData.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_CpuReadWriteData.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="src_odk_helpers\ODK_StringHelper.cpp">
+      <Filter>ODK Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveParam.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WaveProc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_cg_priv\ODK_Types.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_cg_priv\ODK_Functions.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_CpuReadData.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_CpuReadWriteData.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="src_odk_helpers\ODK_StringHelper.h">
+      <Filter>ODK Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveParam.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WaveProc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="FFT_Filt_Data.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="STEP7\FFT_Filt_Data.scl">
+      <Filter>STEP7</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="def\FFT_Filt_Data.odk">
+      <Filter>Definition File</Filter>
+    </CustomBuild>
+  </ItemGroup>
+</Project>
