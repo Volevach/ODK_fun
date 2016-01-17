@@ -3,7 +3,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_Load"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -49,7 +49,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_Unload"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -93,7 +93,7 @@ TYPE "FFT_Filter_RTcomplex"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   STRUCT
     re : REAL;
@@ -106,7 +106,7 @@ FUNCTION_BLOCK "FFT_Filter_RTFFT1024p"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT
     timeCoef : Array[0..1023] of INT;// time domain coefficients
@@ -169,7 +169,7 @@ FUNCTION_BLOCK "FFT_Filter_RTLP_Filter"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT
     freqCoef : Array[0..1023] of FFT_Filter_RTcomplex;// filter input
@@ -233,7 +233,7 @@ FUNCTION_BLOCK "FFT_Filter_RTIFFT1024p"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT
     freqCoef : Array[0..1023] of FFT_Filter_RTcomplex;// frequency domain coefficients
@@ -296,7 +296,7 @@ FUNCTION_BLOCK "FFT_Filter_RTFFT_Filt"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT
     timeCoef : Array[0..1023] of INT;// time domain input coefficients
@@ -357,7 +357,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_GetTrace"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 22:46:11 2016
+//at Sun January 17 22:46:35 2016
 //********************************************************
   VAR_INPUT
     TraceCount : INT;
