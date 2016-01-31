@@ -26,12 +26,14 @@ FFT_Trans::FFT_Trans(void)
     for(i = 0; i < STAGES; i++)
     {
         i_d_fac[i] = d; 
-        c_twiddle_fac[i] = Complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        c_twiddle_fac[i].re = (float)cos(-2.0 * PI / d);
+        c_twiddle_fac[i].im = (float)sin(-2.0 * PI / d);
         d <<= 1;
     }
     
 	// start value for FFT (1)
-    c_w_0 = Complex(1.0, 0.0);
+    c_w_0.re = 1.0;
+    c_w_0.im = 0.0;
 }
 
 // generic destructor
@@ -57,10 +59,12 @@ void FFT_Trans::FFT_Mono(const short i_time_coef[BLOCK_LEN], Complex c_freq_coef
     for(n = 1; n <= STAGES; n++)
     {
         d = (int)(pow(2.0,n));
-        wd = Complex((float)cos(-2.0 * PI / d), (float)sin(-2.0 * PI / d));
+        wd.re = (float)cos(-2.0 * PI / d);
+        wd.im = (float)sin(-2.0 * PI / d);
         for(k = 0; k < BLOCK_LEN; k+=d)
         {
-            w = Complex(1.0, 0.0);
+            w.re = 1.0;
+            w.im = 0.0;
             for(m = 0; m < (d/2); m++)
             {
 
@@ -136,7 +140,8 @@ void FFT_Trans::IFFT_Stereo(const Complex c_freq_coef[BLOCK_LEN][2], short i_tim
     for(n = 1; n <= STAGES; n++)
     {
         d = i_d_fac[n-1];
-        wd = c_twiddle_fac[n-1].ConjCompl();
+        wd.re = c_twiddle_fac[n-1].re;
+        wd.im = -c_twiddle_fac[n-1].im;
         for(k = 0; k < BLOCK_LEN; k+=d)
         {
             w = c_w_0;
@@ -163,8 +168,64 @@ void FFT_Trans::IFFT_Stereo(const Complex c_freq_coef[BLOCK_LEN][2], short i_tim
 	// copy the real value to the ouput samples vector and scale by 2^STAGES
     for(n = 0; n < BLOCK_LEN; n++)
     {
-        i_time_coef[n][0] = (short)( ((int)c_freq_coef_rev[n][0].GetReal()) >> STAGES);
-        i_time_coef[n][1] = (short)( ((int)c_freq_coef_rev[n][1].GetReal()) >> STAGES);  
+        i_time_coef[n][0] = (short)( ((int)c_freq_coef_rev[n][0].re) >> STAGES);
+        i_time_coef[n][1] = (short)( ((int)c_freq_coef_rev[n][1].re) >> STAGES);
+    }
+}
+
+// IFFT for one coefficient stream of length BLOCK_LEN
+void FFT_Trans::IFFT_Mono(const Complex c_freq_coef[BLOCK_LEN], short i_time_coef[BLOCK_LEN])
+{
+    int n, d, k, m;
+
+    Complex w;
+    Complex wd;
+    Complex t;
+    Complex x;
+    Complex c_freq_coef_rev[BLOCK_LEN];
+
+	// copy bit reversed to a temporary vector
+    BitReverseMono(c_freq_coef, c_freq_coef_rev);
+
+	// perform radix 2 IFFT inplace with bit reversed indexes
+    for(n = 1; n <= STAGES; n++)
+    {
+        d = i_d_fac[n-1];
+        wd.re = c_twiddle_fac[n-1].re;
+        wd.im = -c_twiddle_fac[n-1].im;
+        for(k = 0; k < BLOCK_LEN; k+=d)
+        {
+            w = c_w_0;
+            for(m = 0; m < (d/2); m++)
+            {
+                t = CompMul(w, c_freq_coef_rev[m + k + (d/2)]);
+                x = c_freq_coef_rev[m + k];
+                c_freq_coef_rev[m + k] = CompAdd(x, t);
+                c_freq_coef_rev[m + k + (d/2)] = CompSub(x, t);
+
+
+                // twidde :)
+                w = CompMul(w,wd);
+            }
+        }
+    }
+
+	// copy the real value to the ouput samples vector and scale by 2^STAGES
+    for(n = 0; n < BLOCK_LEN; n++)
+    {
+        i_time_coef[n] = (short)( ((int)c_freq_coef_rev[n].re) >> STAGES);
+    }
+}
+
+// bit reverse copy from a complex stream to a complex stream
+void FFT_Trans::BitReverseMono(const Complex a[BLOCK_LEN], Complex b[BLOCK_LEN])
+{
+    int i = 0;
+
+	// copy a to b with bit reversed indexes
+    for(i = 0; i < BLOCK_LEN; i++)
+    {
+        b[i] = a[u_bit_rev_ind[i]];
     }
 }
 
@@ -189,8 +250,11 @@ void FFT_Trans::BitReverse_to_complx2(const short a[BLOCK_LEN][2], Complex b[BLO
 	// copy a to b with bit reversed indexes
 	for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i][0] = Complex((float)a[u_bit_rev_ind[i]][0], 0.0);
-        b[i][1] = Complex((float)a[u_bit_rev_ind[i]][1], 0.0);
+        b[i][0].re = (float)a[u_bit_rev_ind[i]][0];
+        b[i][0].im = 0.0;
+
+        b[i][1].re = (float)a[u_bit_rev_ind[i]][1];
+        b[i][1].im = 0.0;
     }
 }
 
@@ -202,6 +266,7 @@ void FFT_Trans::BitReverse_to_complx(const short a[BLOCK_LEN], Complex b[BLOCK_L
 	// copy a to b with bit reversed indexes
 	for(i = 0; i < BLOCK_LEN; i++)
     {
-        b[i] = Complex((float)a[u_bit_rev_ind[i]],0.0);
+        b[i].re = (float)a[u_bit_rev_ind[i]];
+        b[i].im = 0.0;
     }
 }

@@ -5,33 +5,7 @@
 
 
 #pragma once
-class Complex
-{
-public:
-	// generic constructor
-    Complex(void);
-
-	// constructior with real and imaginary part provided
-    Complex(float re, float im);
-    
-	// generic destructor
-	~Complex(void);
-    
-	// returns the real fraction of the imaginary number as float
-    float GetReal();
-
-	// returns the imaginary fraction of the imaginary number as float
-    float GetImag();
-
-	// returns the conjugated complex representation of the number
-    Complex ConjCompl();
-
-private:
-	// float member variables for the real and imaginary part
-    float f_real;
-    float f_imag;
-
-};
+#include "ODK_Types.h"
 
 // helper function returning the sum of two complex numbers
 Complex CompAdd(Complex a, Complex b);

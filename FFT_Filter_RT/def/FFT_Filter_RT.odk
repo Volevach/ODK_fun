@@ -42,7 +42,7 @@ STEP7Prefix=FFT_Filter_RT
 
 // Basic function in order to show 
 
-ODK_STRUCT complex 
+ODK_STRUCT Complex 
 { 
 	ODK_FLOAT re;
 	ODK_FLOAT im;
@@ -50,12 +50,12 @@ ODK_STRUCT complex
 
                         
 ODK_RESULT FFT1024p([IN]    ODK_INT16   timeCoef[1024]     // time domain coefficients
-                  , [OUT]   complex     freqCoef[1024]);   // frequency domain coefficients
+                  , [OUT]   Complex     freqCoef[1024]);   // frequency domain coefficients
                         
-ODK_RESULT LP_Filter([IN]  complex   freqCoef[1024]     // filter input
-                   , [OUT] complex   freqCoefFilt[1024]); // filter output
+ODK_RESULT LP_Filter([IN]  Complex   freqCoef[1024]     // filter input
+                   , [OUT] Complex   freqCoefFilt[1024]); // filter output
                    
-ODK_RESULT IFFT1024p([IN]   complex     freqCoef[1024]   // frequency domain coefficients
+ODK_RESULT IFFT1024p([IN]   Complex     freqCoef[1024]   // frequency domain coefficients
                   ,  [OUT]  ODK_INT16   timeCoefOut[1024]);   // time domain coefficients
                   
 ODK_RESULT FFT_Filt([IN]    ODK_INT16   timeCoef[1024]     // time domain input coefficients

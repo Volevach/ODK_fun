@@ -3,7 +3,7 @@
  * This file contains the function prototypes the user defined.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sun January 17 22:46:35 2016 
+ * at Sun January 31 20:03:01 2016 
 */
 
 #if !defined    ODK_Functions_H 
@@ -19,21 +19,21 @@
 
 ODK_RESULT FFT1024p (
   /*IN*/ const ODK_INT16 timeCoef[1024],// time domain coefficients
-  /*OUT*/ complex freqCoef[1024]// frequency domain coefficients
+  /*OUT*/ Complex freqCoef[1024]// frequency domain coefficients
 );
-#define _ODK_FUNCTION_FFT1024P  ODK_RESULT FFT1024p (/*IN*/ const ODK_INT16 timeCoef[1024], /*OUT*/ complex freqCoef[1024])
+#define _ODK_FUNCTION_FFT1024P  ODK_RESULT FFT1024p (/*IN*/ const ODK_INT16 timeCoef[1024], /*OUT*/ Complex freqCoef[1024])
 
 ODK_RESULT LP_Filter (
-  /*IN*/ const complex freqCoef[1024],// filter input
-  /*OUT*/ complex freqCoefFilt[1024]// filter output
+  /*IN*/ const Complex freqCoef[1024],// filter input
+  /*OUT*/ Complex freqCoefFilt[1024]// filter output
 );
-#define _ODK_FUNCTION_LP_FILTER  ODK_RESULT LP_Filter (/*IN*/ const complex freqCoef[1024], /*OUT*/ complex freqCoefFilt[1024])
+#define _ODK_FUNCTION_LP_FILTER  ODK_RESULT LP_Filter (/*IN*/ const Complex freqCoef[1024], /*OUT*/ Complex freqCoefFilt[1024])
 
 ODK_RESULT IFFT1024p (
-  /*IN*/ const complex freqCoef[1024],// frequency domain coefficients
+  /*IN*/ const Complex freqCoef[1024],// frequency domain coefficients
   /*OUT*/ ODK_INT16 timeCoefOut[1024]// time domain coefficients
 );
-#define _ODK_FUNCTION_IFFT1024P  ODK_RESULT IFFT1024p (/*IN*/ const complex freqCoef[1024], /*OUT*/ ODK_INT16 timeCoefOut[1024])
+#define _ODK_FUNCTION_IFFT1024P  ODK_RESULT IFFT1024p (/*IN*/ const Complex freqCoef[1024], /*OUT*/ ODK_INT16 timeCoefOut[1024])
 
 ODK_RESULT FFT_Filt (
   /*IN*/ const ODK_INT16 timeCoef[1024],// time domain input coefficients
@@ -41,11 +41,6 @@ ODK_RESULT FFT_Filt (
 );
 #define _ODK_FUNCTION_FFT_FILT  ODK_RESULT FFT_Filt (/*IN*/ const ODK_INT16 timeCoef[1024], /*OUT*/ ODK_INT16 timeCoefOut[1024])
 
-ODK_RESULT GetTrace (
-  /*IN*/ const ODK_INT16& TraceCount,
-  /*OUT*/ ODK_S7STRING TraceBuffer[256][127]
-);
-#define _ODK_FUNCTION_GETTRACE  ODK_RESULT GetTrace (/*IN*/ const ODK_INT16& TraceCount, /*OUT*/ ODK_S7STRING TraceBuffer[256][127])
 
 #endif
 

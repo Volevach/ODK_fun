@@ -5,8 +5,9 @@
 
 
 #pragma once
-#include "stdafx.h"
 #include "Complex.h"
+#include "Math.h"
+#include "defines.h"
 
 class FFT_Trans
 {
@@ -27,6 +28,10 @@ public:
 	// FFT for one coefficient stream of length BLOCK_LEN
 	void FFT_Mono(const short i_time_coef[BLOCK_LEN], Complex c_freq_coef[BLOCK_LEN]);
 
+	// IFFT for one coefficient stream of length BLOCK_LEN
+	void IFFT_Mono(const Complex c_freq_coef[BLOCK_LEN],  short i_time_coef[BLOCK_LEN]);
+
+
 private:
 	// indexes and their correspoing bit reversal representation
     unsigned short u_bit_rev_ind[BLOCK_LEN];
@@ -42,6 +47,10 @@ private:
     
 	// bit reverse copy from a complex stream to a complex stream
     void BitReverse(const Complex a[BLOCK_LEN][2], Complex b[BLOCK_LEN][2]);
+
+    // bit reverse copy from a complex stream to a complex stream
+    void BitReverseMono(const Complex a[BLOCK_LEN], Complex b[BLOCK_LEN]);
+
     
 	// bit reverse copt from a real stream to a complex stream with two channels
 	void BitReverse_to_complx2(const short a[BLOCK_LEN][2], Complex b[BLOCK_LEN][2]);

@@ -4,8 +4,8 @@
 // currently only the low pass is implemented
 
 #pragma once
-#include "stdafx.h"
-#include "complex.h"
+#include "defines.h"
+#include "Complex.h"
 #include "FFT_Trans.h"
 
 #define FILT_LEN 31
@@ -20,7 +20,10 @@ public:
     ~BP_Filter(void);
 
 	// filter function, input and output as stereo complex frequency domain representation
-    void Filter(Complex c_src_sig[BLOCK_LEN][2], Complex c_sink_sig[BLOCK_LEN][2]); 
+    void Filter(const Complex c_src_sig[BLOCK_LEN][2], Complex c_sink_sig[BLOCK_LEN][2]);
+
+    // filter function, input and output as mono complex frequency domain representation
+    void FilterMono(const Complex c_src_sig[BLOCK_LEN], Complex c_sink_sig[BLOCK_LEN]);
     	
 private:
 	// filter coefficients

@@ -13,10 +13,12 @@ BP_Filter::BP_Filter(void)
     FFT_Trans MyFFT = FFT_Trans();
 
 	// compute the scaling = number of bits (2^16)
-    c_flt_scale = Complex(65536.0, 65536.0);
+    c_flt_scale.re = 65536.0;
+    c_flt_scale.im = 65536.0;
     
 	// compute the inverse scaling (1 / 2^16)
-	c_flt_scale_inv = Complex(1.0/65536.0, 1.0/65536.0);
+	c_flt_scale_inv.re = 1.0/65536.0;
+	c_flt_scale_inv.im = 1.0/65536.0;
 
     // zero pad the filter coef 
     short u_filt_coef_zero[BLOCK_LEN] = {0};
@@ -26,7 +28,7 @@ BP_Filter::BP_Filter(void)
     }
     
     // transform the filter function into frequency domain
-    MyFFT.FFT_Mono(u_filt_coef_zero, c_filt_coef_freq);
+    MyFFT.FFT_Mono((const short*)u_filt_coef_zero, c_filt_coef_freq);
 
 	// scale the filter function 
     for(i = 0; i < BLOCK_LEN; i++)
@@ -41,7 +43,7 @@ BP_Filter::~BP_Filter(void)
 }
 
 // filter function
-void BP_Filter::Filter(Complex c_src_sig[BLOCK_LEN][2], Complex c_sink_sig[BLOCK_LEN][2])
+void BP_Filter::Filter(const Complex c_src_sig[BLOCK_LEN][2], Complex c_sink_sig[BLOCK_LEN][2])
 {
     unsigned int i;
 
@@ -50,6 +52,18 @@ void BP_Filter::Filter(Complex c_src_sig[BLOCK_LEN][2], Complex c_sink_sig[BLOCK
     {
         c_sink_sig[i][0] = CompMul(c_src_sig[i][0], c_filt_coef_freq[i]);
         c_sink_sig[i][1] = CompMul(c_src_sig[i][1], c_filt_coef_freq[i]);
+    }
+}
+
+// filter function mono
+void BP_Filter::FilterMono(const Complex c_src_sig[BLOCK_LEN], Complex c_sink_sig[BLOCK_LEN])
+{
+    unsigned int i;
+
+	// multiply the signal coefficients with the filter coefficients
+    for(i = 0; i < BLOCK_LEN; i++)
+    {
+        c_sink_sig[i] = CompMul(c_src_sig[i], c_filt_coef_freq[i]);
     }
 }
 

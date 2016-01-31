@@ -3,7 +3,7 @@
  * This file contains the execute function and the string helpers for ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sun January 17 22:46:35 2016
+ * at Sun January 31 20:03:01 2016
 */
 
 #include "ODK_Functions.h"
@@ -71,9 +71,9 @@ ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
 //command enums
 typedef enum CommandHash_e
 {
-  FCT_HASH_FFT1024p = 0x449D3B68,
-  FCT_HASH_LP_Filter = 0x826821A3,
-  FCT_HASH_IFFT1024p = 0xAAC18141,
+  FCT_HASH_FFT1024p = 0x4EE43648,
+  FCT_HASH_LP_Filter = 0x3FA1A023,
+  FCT_HASH_IFFT1024p = 0xCA1C6261,
   FCT_HASH_FFT_Filt = 0xB4512AC1,
   FCT_HASH_GetTrace = 0xC4B4F52B
 }CommandHash_t;
@@ -88,28 +88,21 @@ ODK_RESULT Execute (ODK_UINT32        cmd
   {
     case FCT_HASH_FFT1024p:
     {
-      return FFT1024p ((ODK_INT16*) &(in[0]), (complex*) &(out[0]));
+      return FFT1024p ((ODK_INT16*) &(in[0]), (Complex*) &(out[0]));
     }
     case FCT_HASH_LP_Filter:
     {
-      return LP_Filter ((complex*) &(in[0]), (complex*) &(out[0]));
+      return LP_Filter ((Complex*) &(in[0]), (Complex*) &(out[0]));
     }
     case FCT_HASH_IFFT1024p:
     {
-      return IFFT1024p ((complex*) &(in[0]), (ODK_INT16*) &(out[0]));
+      return IFFT1024p ((Complex*) &(in[0]), (ODK_INT16*) &(out[0]));
     }
     case FCT_HASH_FFT_Filt:
     {
       return FFT_Filt ((ODK_INT16*) &(in[0]), (ODK_INT16*) &(out[0]));
     }
-    case FCT_HASH_GetTrace:
-    {
-      for (int i_1=0; i_1<256; i_1++)
-      {
-        *((ODK_S7STRING*) &(out[0 + (i_1*127)] )) = 125;
-      }
-      return GetTrace (*((ODK_INT16*) &(in[0])), (ODK_S7STRING(*)[127]) &(out[0]));
-    }
+
     default:
     {
       return ODK_COMMAND_NOT_IMPLEMENTED;

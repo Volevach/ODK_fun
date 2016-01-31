@@ -3,7 +3,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_Load"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -20,7 +20,7 @@ VERSION : 0.1
     _odk_internal_LIBRARY_NAME : String := '<rt>FFT_Filter_RT.so';
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 458596553;
+    _odk_internal_INSTANCE_ID : UDInt := 3892431785;
   END_VAR
 BEGIN
 //
@@ -49,7 +49,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_Unload"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -65,7 +65,7 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 458596553;
+    _odk_internal_INSTANCE_ID : UDInt := 3892431785;
   END_VAR
 BEGIN
  //
@@ -89,11 +89,11 @@ BEGIN
 END_FUNCTION_BLOCK
 
 
-TYPE "FFT_Filter_RTcomplex"
+TYPE "FFT_Filter_RTComplex"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   STRUCT
     re : REAL;
@@ -106,14 +106,14 @@ FUNCTION_BLOCK "FFT_Filter_RTFFT1024p"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT
     timeCoef : Array[0..1023] of INT;// time domain coefficients
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    freqCoef : Array[0..1023] of FFT_Filter_RTcomplex;// frequency domain coefficients
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// frequency domain coefficients
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -129,8 +129,8 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 458596553;
-    _odk_internal_COMMAND : UDINT := 1151155048;
+    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
+    _odk_internal_COMMAND : UDINT := 1323578952;
   END_VAR
 BEGIN
 //
@@ -169,14 +169,14 @@ FUNCTION_BLOCK "FFT_Filter_RTLP_Filter"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT
-    freqCoef : Array[0..1023] of FFT_Filter_RTcomplex;// filter input
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// filter input
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    freqCoefFilt : Array[0..1023] of FFT_Filter_RTcomplex;// filter output
+    freqCoefFilt : Array[0..1023] of FFT_Filter_RTComplex;// filter output
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -192,8 +192,8 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 458596553;
-    _odk_internal_COMMAND : UDINT := 2187862435;
+    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
+    _odk_internal_COMMAND : UDINT := 1067556899;
   END_VAR
 BEGIN
 //
@@ -233,10 +233,10 @@ FUNCTION_BLOCK "FFT_Filter_RTIFFT1024p"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT
-    freqCoef : Array[0..1023] of FFT_Filter_RTcomplex;// frequency domain coefficients
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// frequency domain coefficients
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
@@ -256,8 +256,8 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 458596553;
-    _odk_internal_COMMAND : UDINT := 2864808257;
+    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
+    _odk_internal_COMMAND : UDINT := 3390857825;
   END_VAR
 BEGIN
 //
@@ -296,7 +296,7 @@ FUNCTION_BLOCK "FFT_Filter_RTFFT_Filt"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT
     timeCoef : Array[0..1023] of INT;// time domain input coefficients
@@ -318,7 +318,7 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 458596553;
+    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
     _odk_internal_COMMAND : UDINT := 3025218241;
   END_VAR
 BEGIN
@@ -357,7 +357,7 @@ FUNCTION_BLOCK "FFT_Filter_RT_GetTrace"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
 //Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 22:46:35 2016
+//at Sun January 31 20:03:01 2016
 //********************************************************
   VAR_INPUT
     TraceCount : INT;
@@ -382,7 +382,7 @@ VERSION : 0.1
     _odk_internal_tmp_string : String;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 458596553;
+    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
     _odk_internal_COMMAND : UDINT := 3300193579;
   END_VAR
 BEGIN

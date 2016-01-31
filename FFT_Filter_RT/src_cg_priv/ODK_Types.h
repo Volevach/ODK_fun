@@ -3,7 +3,7 @@
  * This file contains the elementary data types of ODK 1500S.
  *
  * File created by ODK_CodeGenerator version 2.0.0.0 
- * at Sun January 17 22:46:35 2016 
+ * at Sun January 31 20:03:01 2016 
  */
 
 #if !defined ODK_Types_H
@@ -73,7 +73,7 @@ typedef struct
 {
   ODK_FLOAT re;
   ODK_FLOAT im;
-}complex;
+}Complex;
 #pragma pack(pop)
 
 #endif // ODK_Types_H

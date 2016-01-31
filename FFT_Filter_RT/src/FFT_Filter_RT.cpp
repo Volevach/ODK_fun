@@ -1,6 +1,5 @@
 #include "ODK_Functions.h"
-#include "complex.h"
-#include "FFT_1024.h"
+#include "FFT_Trans.h"
 #include "BP_Filter.h"
 
 #ifdef _DEBUG
@@ -9,7 +8,7 @@
 #endif
 
 BP_Filter MyFiler;
-FFT_1024 MyFFT;
+FFT_Trans MyFFT;
 
 /*
  * OnLoad() is invoked after the application binary was loaded.
@@ -22,7 +21,7 @@ FFT_1024 MyFFT;
 EXPORT_API ODK_RESULT OnLoad (void)
 {
 	MyFiler = BP_Filter();
-	MyFFT = FFT_1024();
+	MyFFT = FFT_Trans();
     // place your code here
 	return ODK_SUCCESS;
 }
@@ -99,33 +98,35 @@ int main (int argc, char* argv[])
 
 
 
-ODK_RESULT FFT1024p (const ODK_INT16 timeCoef[BLOCK_LEN], complex freqCoef[1024])
+ODK_RESULT FFT1024p (const ODK_INT16 timeCoef[BLOCK_LEN], Complex freqCoef[1024])
 {
 
-	MyFFT.FFT_1024_mono(timeCoef, freqCoef);
+	MyFFT.FFT_Mono(timeCoef, freqCoef);
 	// place your code here
 	return ODK_SUCCESS;
 }
 
-ODK_RESULT LP_Filter (const  complex src[BLOCK_LEN], complex sink[BLOCK_LEN])
+ODK_RESULT LP_Filter (const  Complex src[BLOCK_LEN], Complex sink[BLOCK_LEN])
 {
-	MyFiler.low_pass_mono(src, sink);
+	MyFiler.FilterMono(src, sink);
 	return ODK_SUCCESS;
 }
 
-ODK_RESULT IFFT1024p (const complex freqCoef[BLOCK_LEN], ODK_INT16 timeCoefOut[BLOCK_LEN])
+ODK_RESULT IFFT1024p (const Complex freqCoef[BLOCK_LEN], ODK_INT16 timeCoefOut[BLOCK_LEN])
 {
-	MyFFT.IFFT_1024_mono(freqCoef, timeCoefOut);
+	MyFFT.IFFT_Mono(freqCoef, timeCoefOut);
 	return ODK_SUCCESS;
 }
 
 ODK_RESULT FFT_Filt (const ODK_INT16 timeCoef[BLOCK_LEN], ODK_INT16 timeCoefOut[BLOCK_LEN])
 {
-	complex freqCoef[BLOCK_LEN];
-	complex freqCoefFilt[BLOCK_LEN];
-	MyFFT.FFT_1024_mono(timeCoef, freqCoef);
-	MyFiler.low_pass_mono(freqCoef, freqCoefFilt);
-	MyFFT.IFFT_1024_mono(freqCoefFilt, timeCoefOut);
+	Complex freqCoef[BLOCK_LEN];
+	Complex freqCoefFilt[BLOCK_LEN];
+
+	MyFFT.FFT_Mono(timeCoef, freqCoef);
+	MyFiler.FilterMono(freqCoef, freqCoefFilt);
+	MyFFT.IFFT_Mono(freqCoefFilt, timeCoefOut);
+
 	return ODK_SUCCESS;
 }
 
