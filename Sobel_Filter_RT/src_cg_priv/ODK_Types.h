@@ -1,9 +1,9 @@
 /* 
- * This file ALWAYS GENERATED - DO NOT MOTIFY this file. 
- * This file contains the elementary data types of ODK 1500S.
+ * This file is AUTO GENERATED - DO NOT MODIFY this file. 
+ * This file contains the data types of ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 2.0.0.0 
- * at Sat January 16 23:56:22 2016 
+ * File created by ODK_CodeGenerator version 200.0.2304.1 
+ * at Sun April 17 19:42:31 2016 
  */
 
 #if !defined ODK_Types_H
@@ -15,10 +15,18 @@
 #else
   #define ODK_TRACE(msg, ...)
 #endif
-
+#ifdef __cplusplus
+extern "C"
+{
+#endif
 void ODK_Trace(const char* p_szFileName, const int p_nLine, const char* p_szMsg, ...);
+#ifdef __cplusplus
+}
+#endif
 
 #define  ODK_SUCCESS         0x0000
+#define  ODK_USER_ERROR_BASE 0xF000
+
 #define  ODK_TRUE            1
 #define  ODK_FALSE           0
 
@@ -45,7 +53,6 @@ typedef  unsigned long       ODK_TOD;
 typedef  unsigned char       ODK_S7STRING;
 typedef  char                ODK_CHAR;
 typedef  unsigned short      ODK_RESULT;
-
 
 #pragma pack(push,1)
 typedef struct ODK_DTL_s

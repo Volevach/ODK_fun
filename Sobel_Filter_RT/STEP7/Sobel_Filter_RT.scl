@@ -2,8 +2,8 @@ FUNCTION_BLOCK "Sobel_Filter_RT_Load"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 23:56:22 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 17 19:42:31 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -20,15 +20,15 @@ VERSION : 0.1
     _odk_internal_LIBRARY_NAME : String := '<rt>Sobel_Filter_RT.so';
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 104671715;
+    _odk_internal_INSTANCE_ID : UDInt := 3670528521;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Load_Instance (REQ:=#REQ,
                       LIBRARY_NAME:=#_odk_internal_LIBRARY_NAME,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -36,20 +36,20 @@ BEGIN
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "Sobel_Filter_RT_Unload"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 23:56:22 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 17 19:42:31 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -65,44 +65,43 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 104671715;
+    _odk_internal_INSTANCE_ID : UDInt := 3670528521;
   END_VAR
 BEGIN
- //
- // DO NOT CHANGE BELOW OF THIS LINE !!
- // This is an automatic generated block by the
- // ODK_CodeGenerator version 2.0.0.0
- // DO NOT CHANGE !!
- //
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Unld_Instance (REQ:=#REQ,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
                       DONE=>#DONE,
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);    
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
-
 FUNCTION_BLOCK "Sobel_Filter_RTSobelFiltImage"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 23:56:22 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 17 19:42:31 2016
 //********************************************************
 // SobelOperation on a 150x150 greyscale image 
   VAR_INPUT
-    image : Array[0..22499] of USINT;// input image
+    image : Array[0..22499] of USINT; // input image
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    image_filt : Array[0..22499] of USINT;// filtered output
+    image_filt : Array[0..22499] of USINT; // filtered output
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -117,17 +116,17 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 104671715;
-    _odk_internal_COMMAND : UDINT := 4172101238;
+    _odk_internal_INSTANCE_ID : UDINT := 3670528521;
+    _odk_internal_COMMAND : UDINT := 2338737159;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
-// SobelOperation on a 150x150 greyscale image 
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // SobelOperation on a 150x150 greyscale image 
   #_odk_internal_pos := 0;
   FOR #_odk_internal_i := 0 to 22499 DO
     #_odk_internal_err := WRITE_LITTLE ( src_variable := #image[#_odk_internal_i], dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
@@ -144,20 +143,20 @@ BEGIN
       #_odk_internal_err := READ_LITTLE (dest_variable  := #image_filt[#_odk_internal_i], src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
     END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "Sobel_Filter_RT_GetTrace"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sat January 16 23:56:22 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 17 19:42:31 2016
 //********************************************************
   VAR_INPUT
     TraceCount : INT;
@@ -182,16 +181,16 @@ VERSION : 0.1
     _odk_internal_tmp_string : String;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 104671715;
-    _odk_internal_COMMAND : UDINT := 3300193579;
+    _odk_internal_INSTANCE_ID : UDINT := 3670528521;
+    _odk_internal_COMMAND : UDINT := 4033566251;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #_odk_internal_pos := 0;
   #_odk_internal_err := WRITE_LITTLE ( src_variable := #TraceCount, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
   #STATUS:=ODK_ExcS(INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -216,11 +215,11 @@ BEGIN
       #TraceBuffer[#_odk_internal_j] := #_odk_internal_tmp_string;
     END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 

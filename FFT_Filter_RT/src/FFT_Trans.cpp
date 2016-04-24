@@ -165,7 +165,7 @@ void FFT_Trans::IFFT_Stereo(const Complex c_freq_coef[BLOCK_LEN][2], short i_tim
         }
     }
     
-	// copy the real value to the ouput samples vector and scale by 2^STAGES
+	// copy the real value to the output samples vector and scale by 2^STAGES
     for(n = 0; n < BLOCK_LEN; n++)
     {
         i_time_coef[n][0] = (short)( ((int)c_freq_coef_rev[n][0].re) >> STAGES);

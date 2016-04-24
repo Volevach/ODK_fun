@@ -1,9 +1,9 @@
 /*
- * This file is ALWAYS GENERATED - DO NOT MODIFY this file.
- * This file contains the execute function and the string helpers for ODK 1500S.
+ * This file is AUTO GENERATED - DO NOT MODIFY this file. 
+ * This file contains the execute function and trace helpers for ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 2.0.0.0
- * at Sat January 16 23:56:22 2016
+ * File created by ODK_CodeGenerator version 200.0.2304.1
+ * at Sun April 17 19:42:31 2016
 */
 
 #include "ODK_Functions.h"
@@ -39,7 +39,7 @@ struct tm  g_TimeInfoBase = {0};
 ODK_UINT32 g_ODK1500sBuildVersion = (2 << 24) + (0 << 16) + (0 << 8) + 0;
 ODK_UINT8  g_SyncCallParallelCount = 3;
 ODK_UINT32 g_SyncCallStackSize = (32 * 1024);
-ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
+ODK_UINT32 g_SyncCallDataSize = (44 * 1024);
 
 #ifndef _DEBUG
   const int g_DsoHeapSize  = (4 * 1024);
@@ -66,11 +66,17 @@ ODK_UINT32 g_SyncCallDataSize = (64 * 1024);
   }
 #endif
 
+// declaration of the callbacks for testing them in Execute()
+EXPORT_API ODK_RESULT OnLoad (void);
+EXPORT_API ODK_RESULT OnUnload (void);
+EXPORT_API ODK_RESULT OnRun (void);
+EXPORT_API ODK_RESULT OnStop (void);
+
 //command enums
 typedef enum CommandHash_e
 {
-  FCT_HASH_SobelFiltImage = 0xF8AD3676,
-  FCT_HASH_GetTrace = 0xC4B4F52B
+  FCT_HASH_SobelFiltImage = 0x8B664C07,
+  FCT_HASH_GetTrace = 0xF06B562B
 }CommandHash_t;
 
 //Execute()
@@ -87,7 +93,7 @@ ODK_RESULT Execute (ODK_UINT32        cmd
     }
     case FCT_HASH_GetTrace:
     {
-      for (int i_1=0; i_1<256; i_1++)
+      for (int i_1=0;i_1<256;i_1++)
       {
         *((ODK_S7STRING*) &(out[0 + (i_1*127)] )) = 125;
       }
@@ -95,10 +101,23 @@ ODK_RESULT Execute (ODK_UINT32        cmd
     }
     default:
     {
+      typedef ODK_RESULT (*t_CallbackFunction)(void);
+      #pragma GCC diagnostic push
+      #pragma GCC diagnostic ignored "-Wunused-variable"
+      // check the existence of the callback functions
+      // (but suppress warning of not used variables)
+      {
+        t_CallbackFunction tmp1 = &OnLoad;
+        t_CallbackFunction tmp2 = &OnUnload;
+        t_CallbackFunction tmp3 = &OnRun;
+        t_CallbackFunction tmp4 = &OnStop;
+      }
+      #pragma GCC diagnostic pop
       return ODK_COMMAND_NOT_IMPLEMENTED;
     }
   }
 }
+
 typedef struct Internal_ExecuteRT_s
 {
   ODK_UINT32    Command;
@@ -112,7 +131,6 @@ EXPORT_API int ExecuteRT(void* p_pMsg)
   Internal_ExecuteRT_t* pMsg = (Internal_ExecuteRT_t*) p_pMsg;
   return Execute (pMsg->Command, pMsg->_IN, pMsg->_INOUT, pMsg->_OUT);
 }
-
 
 void ODK_Trace(const char* p_szFileName, const int p_nLine, const char* p_szMsg, ...)
 {

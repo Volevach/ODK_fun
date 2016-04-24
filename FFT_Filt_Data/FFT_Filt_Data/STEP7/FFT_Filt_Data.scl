@@ -2,8 +2,8 @@ FUNCTION_BLOCK "FFT_Filt_Data_Load"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 17:54:04 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -20,15 +20,15 @@ VERSION : 0.1
     _odk_internal_LIBRARY_NAME : String := '<nrt>FFT_Filt_Data.dll';
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 2356564350;
+    _odk_internal_INSTANCE_ID : UDInt := 4055393781;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Load_Instance (REQ:=#REQ,
                       LIBRARY_NAME:=#_odk_internal_LIBRARY_NAME,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -36,20 +36,20 @@ BEGIN
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filt_Data_Unload"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 17:54:04 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -65,42 +65,41 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 2356564350;
+    _odk_internal_INSTANCE_ID : UDInt := 4055393781;
   END_VAR
 BEGIN
- //
- // DO NOT CHANGE BELOW OF THIS LINE !!
- // This is an automatic generated block by the
- // ODK_CodeGenerator version 2.0.0.0
- // DO NOT CHANGE !!
- //
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Unld_Instance (REQ:=#REQ,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
                       DONE=>#DONE,
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);    
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
-
 FUNCTION_BLOCK "FFT_Filt_DataWaveSetup"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 17:54:04 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
 //********************************************************
 // Setup file handles for IO operation
   VAR_INPUT
     REQ : Bool;
-    inFileName : STRING[254];// input wave
-    outFileName : STRING[254];// output to write to
+    inFileName : STRING[254]; // input wave
+    outFileName : STRING[254]; // output to write to
   END_VAR
   VAR_OUTPUT
     ERROR : Bool := false;
@@ -124,17 +123,17 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 2356564350;
-    _odk_internal_COMMAND : UDINT := 2507301330;
+    _odk_internal_INSTANCE_ID : UDINT := 4055393781;
+    _odk_internal_COMMAND : UDINT := 2806550197;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
-// Setup file handles for IO operation
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // Setup file handles for IO operation
   IF NOT #_odk_internal_Last_REQ & #REQ & NOT #BUSY THEN
     #_odk_internal_pos := 0;
     #_odk_internal_tmpStringLen := INT_TO_BYTE (LEN(inFileName));
@@ -170,20 +169,82 @@ BEGIN
                      BUSY=>#BUSY,
                      ERROR=>#ERROR,
                      STATUS=>#STATUS);
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
+END_FUNCTION_BLOCK
+
+FUNCTION_BLOCK "FFT_Filt_DataWaveSetupNoName"
+{ S7_Optimized_Access := 'TRUE' }
+VERSION : 0.1
+//This block is AUTO GENERATED - DO NOT MODIFY this block!
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
+//********************************************************
+// Test Setup file handles without name
+  VAR_INPUT
+    REQ : Bool;
+
+  END_VAR
+  VAR_OUTPUT
+    ERROR : Bool := false;
+    DONE : Bool := false;
+    BUSY : Bool := false;
+    STATUS : INT := 0;
+
+  END_VAR
+  VAR
+    _odk_internal_Last_REQ : Bool := false;
+    _odk_internal_Last_BUSY : Bool := false;
+    ODK_ExcA_Instance {OriginalPartName :=
+            'ODK_ExcA_SFB_2013'; LibVersion := '1.0'} : ODK_ExcA;
+  END_VAR
+  VAR_TEMP 
+    _odk_internal_pos : DInt;
+    _odk_internal_err : Int;
+    _odk_internal_i : Int;
+    _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
+  END_VAR
+  VAR CONSTANT 
+    _odk_internal_INSTANCE_ID : UDINT := 4055393781;
+    _odk_internal_COMMAND : UDINT := 1271720052;
+  END_VAR
+BEGIN
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // Test Setup file handles without name
+  #_odk_internal_Last_REQ := #REQ;	
+  #ODK_ExcA_Instance(REQ:=#REQ,
+                     INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
+                     COMMAND:=#_odk_internal_COMMAND,
+                     IN_DATA:=_odk_internal_tmpDefaultValue,
+                     INOUT_DATA:=_odk_internal_tmpDefaultValue,
+                     OUT_DATA:=_odk_internal_tmpDefaultValue,
+                     DONE=>#DONE,
+                     BUSY=>#BUSY,
+                     ERROR=>#ERROR,
+                     STATUS=>#STATUS);
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filt_DataGetSamplesStereo"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 17:54:04 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
 //********************************************************
 // Get one filter samlple for processing   
   VAR_INPUT
@@ -195,9 +256,9 @@ VERSION : 0.1
     DONE : Bool := false;
     BUSY : Bool := false;
     STATUS : INT := 0;
-    inputSamplesL : Array[0..1023] of INT;// input audio samples left
-    inputSamplesR : Array[0..1023] of INT;// input audio samples right
-    lastSample : BOOL;// last sample indicator
+    inputSamplesL : Array[0..1023] of INT; // input audio samples left
+    inputSamplesR : Array[0..1023] of INT; // input audio samples right
+    lastSample : BOOL; // last sample indicator
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -213,17 +274,17 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 2356564350;
-    _odk_internal_COMMAND : UDINT := 3136283026;
+    _odk_internal_INSTANCE_ID : UDINT := 4055393781;
+    _odk_internal_COMMAND : UDINT := 2530698148;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
-// Get one filter samlple for processing   
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // Get one filter samlple for processing   
   #_odk_internal_Last_REQ := #REQ;	
   #ODK_ExcA_Instance(REQ:=#REQ,
                      INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -247,26 +308,26 @@ BEGIN
     #_odk_internal_pos  := #_odk_internal_pos + 1;
   END_IF;
   #_odk_internal_Last_BUSY := #BUSY;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filt_DataWriteSamples"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 17 17:54:04 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:35:15 2016
 //********************************************************
 // write processed sample frame into file
   VAR_INPUT
     REQ : Bool;
-    filteredSamplesL : Array[0..1023] of INT;// output to write to left chan
-    filteredSamplesR : Array[0..1023] of INT;// output to write to right chan
+    filteredSamplesL : Array[0..1023] of INT; // output to write to left chan
+    filteredSamplesR : Array[0..1023] of INT; // output to write to right chan
   END_VAR
   VAR_OUTPUT
     ERROR : Bool := false;
@@ -289,17 +350,17 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 2356564350;
-    _odk_internal_COMMAND : UDINT := 2661601326;
+    _odk_internal_INSTANCE_ID : UDINT := 4055393781;
+    _odk_internal_COMMAND : UDINT := 1897094642;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
-// write processed sample frame into file
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // write processed sample frame into file
   IF NOT #_odk_internal_Last_REQ & #REQ & NOT #BUSY THEN
     #_odk_internal_pos := 0;
     FOR #_odk_internal_i := 0 to 1023 DO
@@ -321,11 +382,10 @@ BEGIN
                      BUSY=>#BUSY,
                      ERROR=>#ERROR,
                      STATUS=>#STATUS);
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
-

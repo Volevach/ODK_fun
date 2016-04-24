@@ -61,6 +61,41 @@ EXPORT_API ODK_RESULT OnStop (void)
     return ODK_SUCCESS;
 }
 
+// Test setup file handles for IO operation no Name
+ODK_RESULT WaveSetupNoName()
+{
+	inFile = fopen("D:/Data/test_in.wav", "rb");
+	outFile = fopen("D:/Data/test_out.wav", "wb");
+	
+	char wavPreface[44];
+
+
+	for (int i = 0; i < 44; i++)
+	{
+		wavPreface[i] = (char)getc(inFile);
+	}
+
+	// initialize the Wave processing class
+	MyWave = WaveProc(wavPreface);
+
+
+	// currently supporting only stereo wave
+	if ((MyWave.GetFormatType() != 1) && (MyWave.GetChannelNum() != 2))
+	{
+		return -1;                   // not stereo wave    
+	}
+
+	// get the amount of 994 samples blocks and the amount of remainder samples
+	int len = MyWave.GetDataLen() / 4;
+	unsigned int rem = len % NET_LEN;
+	loopCnt = (int)((len - rem) / NET_LEN);
+
+	MyWave.WriteHeader(outFile, (loopCnt + 1) * 4 * NET_LEN);
+
+
+	return ODK_SUCCESS;
+}
+
 
 // Setup file handles for IO operation
 ODK_RESULT WaveSetup(
@@ -68,7 +103,7 @@ ODK_RESULT WaveSetup(
 	/*IN*/ const ODK_S7STRING outFileName[256]// output to write to
 	)
 {
-	inFile = fopen((const char*) inFileName, "rb");
+	inFile = fopen((const char*)inFileName, "rb");
 	outFile = fopen((const char*)outFileName, "wb");
 
 	

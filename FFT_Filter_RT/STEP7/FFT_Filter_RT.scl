@@ -2,8 +2,8 @@ FUNCTION_BLOCK "FFT_Filter_RT_Load"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -20,15 +20,15 @@ VERSION : 0.1
     _odk_internal_LIBRARY_NAME : String := '<rt>FFT_Filter_RT.so';
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 3892431785;
+    _odk_internal_INSTANCE_ID : UDInt := 1300268953;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Load_Instance (REQ:=#REQ,
                       LIBRARY_NAME:=#_odk_internal_LIBRARY_NAME,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -36,20 +36,20 @@ BEGIN
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RT_Unload"
 { S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
   VAR_INPUT 
     REQ : Bool;
@@ -65,35 +65,34 @@ VERSION : 0.1
          'ODK_Unld_SFB_2012'; LibVersion := '1.0'} : ODK_Unld;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDInt := 3892431785;
+    _odk_internal_INSTANCE_ID : UDInt := 1300268953;
   END_VAR
 BEGIN
- //
- // DO NOT CHANGE BELOW OF THIS LINE !!
- // This is an automatic generated block by the
- // ODK_CodeGenerator version 2.0.0.0
- // DO NOT CHANGE !!
- //
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #ODK_Unld_Instance (REQ:=#REQ,
                       INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
                       DONE=>#DONE,
                       BUSY=>#BUSY,
                       ERROR=>#ERROR,
                       STATUS=>#STATUS);    
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
-
 
 TYPE "FFT_Filter_RTComplex"
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
   STRUCT
     re : REAL;
@@ -102,18 +101,19 @@ VERSION : 0.1
 END_TYPE
 
 FUNCTION_BLOCK "FFT_Filter_RTFFT1024p"
-{ S7_Optimized_Access := 'FALSE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
+// perform a 1024 point fast fourier transformation                       
   VAR_INPUT
-    timeCoef : Array[0..1023] of INT;// time domain coefficients
+    timeCoef : Array[0..1023] of INT; // time domain coefficients
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// frequency domain coefficients
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex; // frequency domain coefficients
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -129,16 +129,17 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
-    _odk_internal_COMMAND : UDINT := 1323578952;
+    _odk_internal_INSTANCE_ID : UDINT := 1300268953;
+    _odk_internal_COMMAND : UDINT := 3762803041;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // perform a 1024 point fast fourier transformation                       
   #_odk_internal_pos := 0;
   FOR #_odk_internal_i := 0 to 1023 DO
     #_odk_internal_err := WRITE_LITTLE ( src_variable := #timeCoef[#_odk_internal_i], dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
@@ -156,27 +157,28 @@ BEGIN
       #_odk_internal_err := READ_LITTLE (dest_variable  := #freqCoef[#_odk_internal_udt_0].im, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
   END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RTLP_Filter"
-{ S7_Optimized_Access := 'FALSE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
+// multiply complex coeffs with a filter function                        
   VAR_INPUT
-    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// filter input
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex; // filter input
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    freqCoefFilt : Array[0..1023] of FFT_Filter_RTComplex;// filter output
+    freqCoefFilt : Array[0..1023] of FFT_Filter_RTComplex; // filter output
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -192,16 +194,17 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
-    _odk_internal_COMMAND : UDINT := 1067556899;
+    _odk_internal_INSTANCE_ID : UDINT := 1300268953;
+    _odk_internal_COMMAND : UDINT := 1993759514;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // multiply complex coeffs with a filter function                        
   #_odk_internal_pos := 0;
   FOR #_odk_internal_udt_0 := 0 to 1023 DO
     #_odk_internal_err := WRITE_LITTLE ( src_variable := #freqCoef[#_odk_internal_udt_0].re, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
@@ -220,27 +223,28 @@ BEGIN
       #_odk_internal_err := READ_LITTLE (dest_variable  := #freqCoefFilt[#_odk_internal_udt_0].im, src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
   END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RTIFFT1024p"
-{ S7_Optimized_Access := 'FALSE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
+// perform an inverse 1024 point fast fourier transformation                   
   VAR_INPUT
-    freqCoef : Array[0..1023] of FFT_Filter_RTComplex;// frequency domain coefficients
+    freqCoef : Array[0..1023] of FFT_Filter_RTComplex; // frequency domain coefficients
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    timeCoefOut : Array[0..1023] of INT;// time domain coefficients
+    timeCoefOut : Array[0..1023] of INT; // time domain coefficients
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -256,16 +260,17 @@ VERSION : 0.1
     _odk_internal_udt_0 : Int;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
-    _odk_internal_COMMAND : UDINT := 3390857825;
+    _odk_internal_INSTANCE_ID : UDINT := 1300268953;
+    _odk_internal_COMMAND : UDINT := 93215674;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // perform an inverse 1024 point fast fourier transformation                   
   #_odk_internal_pos := 0;
   FOR #_odk_internal_udt_0 := 0 to 1023 DO
     #_odk_internal_err := WRITE_LITTLE ( src_variable := #freqCoef[#_odk_internal_udt_0].re, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
@@ -283,27 +288,28 @@ BEGIN
       #_odk_internal_err := READ_LITTLE (dest_variable  := #timeCoefOut[#_odk_internal_i], src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
     END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RTFFT_Filt"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
+// perform a full filter with FFT->Filter->IFFT
   VAR_INPUT
-    timeCoef : Array[0..1023] of INT;// time domain input coefficients
+    timeCoef : Array[0..1023] of INT; // time domain input coefficients
   END_VAR
   VAR_OUTPUT
     STATUS : INT := 0;
-    timeCoefOut : Array[0..1023] of INT;// time domain output coefficients
+    timeCoefOut : Array[0..1023] of INT; // time domain output coefficients
   END_VAR
   VAR
     _odk_internal_Last_REQ : Bool := false;
@@ -318,16 +324,17 @@ VERSION : 0.1
     _odk_internal_tmpDefaultValue : Array [0..0] of Byte;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
-    _odk_internal_COMMAND : UDINT := 3025218241;
+    _odk_internal_INSTANCE_ID : UDINT := 1300268953;
+    _odk_internal_COMMAND : UDINT := 1847992643;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
+  // perform a full filter with FFT->Filter->IFFT
   #_odk_internal_pos := 0;
   FOR #_odk_internal_i := 0 to 1023 DO
     #_odk_internal_err := WRITE_LITTLE ( src_variable := #timeCoef[#_odk_internal_i], dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
@@ -344,20 +351,20 @@ BEGIN
       #_odk_internal_err := READ_LITTLE (dest_variable  := #timeCoefOut[#_odk_internal_i], src_array := #_odk_internal_OUT_BUFFER,  pos := #_odk_internal_pos);
     END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 
 FUNCTION_BLOCK "FFT_Filter_RT_GetTrace"
-{ S7_Optimized_Access := 'TRUE'} 
+{ S7_Optimized_Access := 'TRUE' }
 VERSION : 0.1
 //This block is AUTO GENERATED - DO NOT MODIFY this block!
-//Created by ODK_CodeGenerator version 2.0.0.0
-//at Sun January 31 20:03:01 2016
+//Created by ODK_CodeGenerator version 200.0.2304.1
+//at Sun April 24 18:14:54 2016
 //********************************************************
   VAR_INPUT
     TraceCount : INT;
@@ -382,16 +389,16 @@ VERSION : 0.1
     _odk_internal_tmp_string : String;
   END_VAR
   VAR CONSTANT 
-    _odk_internal_INSTANCE_ID : UDINT := 3892431785;
-    _odk_internal_COMMAND : UDINT := 3300193579;
+    _odk_internal_INSTANCE_ID : UDINT := 1300268953;
+    _odk_internal_COMMAND : UDINT := 4033566251;
   END_VAR
 BEGIN
-//
-// DO NOT CHANGE BELOW OF THIS LINE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE !!
-//
+  //
+  // DO NOT CHANGE BELOW OF THIS LINE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE !!
+  //
   #_odk_internal_pos := 0;
   #_odk_internal_err := WRITE_LITTLE ( src_variable := #TraceCount, dest_array := #_odk_internal_IN_BUFFER,  pos := #_odk_internal_pos);
   #STATUS:=ODK_ExcS(INSTANCE_ID:=#_odk_internal_INSTANCE_ID,
@@ -416,11 +423,11 @@ BEGIN
       #TraceBuffer[#_odk_internal_j] := #_odk_internal_tmp_string;
     END_FOR;
   END_IF;
-//
-// DO NOT CHANGE !!
-// This is an automatic generated block by the
-// ODK_CodeGenerator version 2.0.0.0
-// DO NOT CHANGE ABOVE OF THIS LINE !!
-//
+  //
+  // DO NOT CHANGE !!
+  // This is an automatic generated block by the
+  // SIMATIC ODK 1500S V2.0
+  // DO NOT CHANGE ABOVE OF THIS LINE !!
+  //
 END_FUNCTION_BLOCK
 

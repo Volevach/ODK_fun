@@ -43,6 +43,9 @@ STEP7Prefix=FFT_Filt_Data
 // Setup file handles for IO operation
 ODK_RESULT WaveSetup([IN]    ODK_S7STRING    inFileName		// input wave
                    , [IN]    ODK_S7STRING    outFileName);	// output to write to
+
+// Test Setup file handles without name
+ODK_RESULT WaveSetupNoName();	// output to write to
                    
 // Get one filter samlple for processing   
 ODK_RESULT GetSamplesStereo([OUT]   ODK_INT16   inputSamplesL[1024]  	// input audio samples left

@@ -48,16 +48,19 @@ ODK_STRUCT Complex
 	ODK_FLOAT im;
 }; 
 
-                        
+// perform a 1024 point fast fourier transformation                       
 ODK_RESULT FFT1024p([IN]    ODK_INT16   timeCoef[1024]     // time domain coefficients
                   , [OUT]   Complex     freqCoef[1024]);   // frequency domain coefficients
-                        
+
+// multiply complex coeffs with a filter function                        
 ODK_RESULT LP_Filter([IN]  Complex   freqCoef[1024]     // filter input
                    , [OUT] Complex   freqCoefFilt[1024]); // filter output
-                   
+
+// perform an inverse 1024 point fast fourier transformation                   
 ODK_RESULT IFFT1024p([IN]   Complex     freqCoef[1024]   // frequency domain coefficients
                   ,  [OUT]  ODK_INT16   timeCoefOut[1024]);   // time domain coefficients
-                  
+
+// perform a full filter with FFT->Filter->IFFT
 ODK_RESULT FFT_Filt([IN]    ODK_INT16   timeCoef[1024]     // time domain input coefficients
                   , [OUT]   ODK_INT16   timeCoefOut[1024]);  // time domain output coefficients
                         
