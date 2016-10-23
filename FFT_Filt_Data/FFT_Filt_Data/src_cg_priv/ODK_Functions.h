@@ -2,11 +2,11 @@
  * This file is AUTO GENERATED - DO NOT MODIFY this file. 
  * This file contains the function prototypes of ODK 1500S.
  *
- * File created by ODK_CodeGenerator version 200.0.2304.1
- * at Sun April 24 18:35:15 2016 
+ * File created by ODK_CodeGenerator version 200.0.3002.1
+ * at Sa Oktober 22 17:12:18 2016 
 */
 
-#if !defined    ODK_Functions_H
+#if !defined ODK_Functions_H
 #define ODK_Functions_H
 
 #include "ODK_Types.h"

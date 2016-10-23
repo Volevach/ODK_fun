@@ -4,7 +4,6 @@
 
 #ifdef _DEBUG
 #include "debug_param.h"
-#include <stdio.h>
 #endif
 
 BP_Filter MyFiler;
@@ -84,7 +83,7 @@ int main (int argc, char* argv[])
     	ret = FFT_Filt(&(test_input[i*BLOCK_LEN]), test_output);
     	for(int j = 0; j < BLOCK_LEN; j++)
     	{
-    		printf("%d, \n",test_output[j]);
+    	//	printf("%d, \n",test_output[j]);
     	}
     }
 

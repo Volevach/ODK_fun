@@ -21,7 +21,7 @@ unsigned int loopCnt;
 EXPORT_API ODK_RESULT OnLoad (void)
 {
     // place your code here
-    return ODK_SUCCESS;
+	return WaveSetupNoName();
 }
 
 /*
